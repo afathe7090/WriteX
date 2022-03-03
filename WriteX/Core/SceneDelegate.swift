@@ -6,7 +6,9 @@
 //
 
 import UIKit
+import Swinject
 
+let container = Container()
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -15,8 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = LoginVC()
-        window?.makeKeyAndVisible()
+        configureAppWindow()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -47,6 +48,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+    
+    func configureAppWindow(){
+        
+        guard let rootVC = container.resolve(LoginVC.self) else { return }
+        window?.rootViewController = UINavigationController(rootViewController: rootVC)
+        UINavigationBar.appearance().isHidden = true
+        window?.makeKeyAndVisible()
+    }
 
 }
 
