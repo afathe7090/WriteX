@@ -67,7 +67,6 @@ class LoginVC: UIViewController {
                 .receive(on: DispatchQueue.main)
                 .sink {[weak self] _ in
                     guard let self = self else { return }
-                    self.viewModel.configureValidation()
                     self.viewModel.signIn()
                 }.store(in: &self.cancelable)
         }
@@ -78,8 +77,8 @@ class LoginVC: UIViewController {
             self.forgetPasswordButtn.tapPublisher
                 .receive(on: DispatchQueue.main)
                 .sink { _ in
-                    self.emailTextField.shakeField()
-//                    self.configurePushForgetVC()
+                    guard let forgetVC = container.resolve(ForgetVC.self) else { return }
+                    self.navigationController?.pushViewController(forgetVC, animated: true)
                 }.store(in: &self.cancelable)
         }
     }
@@ -88,24 +87,12 @@ class LoginVC: UIViewController {
     private func setRegisterButtonAction() async {
         DispatchQueue.main.async {
             self.registerButton.tapPublisher
+                .receive(on: DispatchQueue.main)
                 .sink { _ in
-                    self.configurePushToRegisterVC()
+                    guard let regiserVC = container.resolve(RegisterVC.self) else { return }
+                    self.navigationController?.pushViewController(regiserVC, animated: true)
                 }.store(in: &self.cancelable)
         }
-    }
-    
-    //----------------------------------------------------------------------------------------------------------------
-    //=======>MARK: -  Start Navigations
-    //----------------------------------------------------------------------------------------------------------------
-    
-    private func configurePushToRegisterVC(){
-        guard let regiserVC = container.resolve(RegisterVC.self) else { return }
-        navigationController?.pushViewController(regiserVC, animated: true)
-    }
-    
-    private func configurePushForgetVC(){
-        guard let forgetVC = container.resolve(ForgetVC.self) else { return }
-        navigationController?.pushViewController(forgetVC, animated: true)
     }
     
     
@@ -149,7 +136,7 @@ class LoginVC: UIViewController {
                 case .home:
                     print("Home")
                 }
-        }.store(in: &cancelable)
+            }.store(in: &cancelable)
     }
 }
 

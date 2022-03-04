@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,9 +12,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterVC" customModule="WriteX" customModuleProvider="target">
             <connections>
                 <outlet property="backButtonPressed" destination="t6R-7P-fqE" id="93h-K2-0Ip"/>
-                <outlet property="backToLogin" destination="JQd-Xz-ids" id="ms5-Is-dRf"/>
                 <outlet property="confirmPasswordTextField" destination="aHr-fj-VnV" id="z9y-K1-UuB"/>
                 <outlet property="emailTextField" destination="Or6-XL-ACi" id="ow8-Vd-bM0"/>
+                <outlet property="loginPageButton" destination="JQd-Xz-ids" id="ms5-Is-dRf"/>
                 <outlet property="passwordTextField" destination="B0q-y7-4ko" id="fae-a8-zaf"/>
                 <outlet property="registerButtonPressed" destination="K2O-xh-yNm" id="3N5-rg-pS4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -56,9 +57,9 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" alpha="0.56599998474121094" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2O-xh-yNm">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2O-xh-yNm">
                     <rect key="frame" x="20" y="421.5" width="374" height="50"/>
-                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" name="mainBlueTint"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="bBE-Gf-bnZ"/>
                     </constraints>
@@ -111,6 +112,9 @@
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <namedColor name="backgroundColor">
             <color red="0.94900000095367432" green="0.94900000095367432" blue="0.96899998188018799" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="mainBlueTint">
+            <color red="0.28235294117647058" green="0.37254901960784315" blue="0.71372549019607845" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="textFieldBackground">
             <color red="0.99599999189376831" green="0.99599999189376831" blue="0.99599999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

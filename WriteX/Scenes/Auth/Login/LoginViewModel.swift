@@ -19,18 +19,19 @@ enum AnimationShanke{
 
 class LoginViewModel {
     
-    let emailPublisher = CurrentValueSubject<String,Never>("")
-    let passwordPublisher = CurrentValueSubject<String,Never>("")
+    let emailPublisher              = CurrentValueSubject<String,Never>("")
+    let passwordPublisher           = CurrentValueSubject<String,Never>("")
     
-    let presentPublisher = PassthroughSubject<loginPresentCases,Never>()
+    let presentPublisher            = PassthroughSubject<loginPresentCases,Never>()
     
-    
-    let animationEmailPublisher = CurrentValueSubject<Bool, Never>(false)
-    let animationaPassPublisher = CurrentValueSubject<Bool, Never>(false)
+    let animationEmailPublisher     = CurrentValueSubject<Bool, Never>(false)
+    let animationaPassPublisher     = CurrentValueSubject<Bool, Never>(false)
     
     var firebase: FirebaseWorker!
     var cancelable = Set<AnyCancellable>()
     
+    
+     //MARK: - protocls
     private var validation: ValidationManager{
         return ValidationPublisher()
     }
@@ -39,45 +40,42 @@ class LoginViewModel {
         return PredicateManager()
     }
     
+    
+     //MARK: - Init
     init(){}
     
+    
+     //MARK: - Sign in
     func signIn(){
         Task{
             let (_, error) = await firebase.signIn(email: emailPublisher, password: passwordPublisher)
             if let error = error {
-                // print error
                 print(error)
-            }else{
-                // go to home
-                print("Success to login ")
-                presentPublisher.send(.home)
-            }
+                await checkValidationOfEmail()
+                await checkValidationOfPassword()
+            }else{ presentPublisher.send(.home) }
         }
     }
     
     
     //MARK: - Set Animations
-    func configureValidation(){
-        checkValidationOfEmail()
-        checkValidationOfPassword()
+    func configureValidation() {
+        Task{
+           await checkValidationOfEmail()
+           await checkValidationOfPassword()
+        }
     }
     
-    func checkValidationOfEmail(){
+    func checkValidationOfEmail() async {
         let state = predicate.predicateEmail(str: emailPublisher.value)
         animationEmailPublisher.send(!state)
     }
     
-    func checkValidationOfPassword(){
+    func checkValidationOfPassword() async {
         let secureType = passwordPublisher.value.count >= 8
         animationaPassPublisher.send(!secureType)
     }
     
     
-    func changeStateOfLogin()-> AnyPublisher<Bool, Never>{
-        return Publishers.CombineLatest(validation.checkEmailValidPublisher(emailPublisher),
-                                 validation.checkTextIsValidPublisher(passwordPublisher)).map { (emailState , passState) in
-            return passState && emailState
-        }.eraseToAnyPublisher()
-    }
     
 }
