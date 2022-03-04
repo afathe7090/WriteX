@@ -38,6 +38,8 @@
 		74B551DB27CF021D00BE3335 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B551DA27CF021D00BE3335 /* RegisterViewModel.swift */; };
 		74B551DE27CF023A00BE3335 /* ForgetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B551DC27CF023A00BE3335 /* ForgetVC.swift */; };
 		74B551DF27CF023A00BE3335 /* ForgetVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74B551DD27CF023A00BE3335 /* ForgetVC.xib */; };
+		74C5D54127D1A681005A9550 /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C5D53F27D1A681005A9550 /* ValidationManager.swift */; };
+		74C5D54227D1A681005A9550 /* PredicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C5D54027D1A681005A9550 /* PredicationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +70,8 @@
 		74B551DA27CF021D00BE3335 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		74B551DC27CF023A00BE3335 /* ForgetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetVC.swift; sourceTree = "<group>"; };
 		74B551DD27CF023A00BE3335 /* ForgetVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgetVC.xib; sourceTree = "<group>"; };
+		74C5D53F27D1A681005A9550 /* ValidationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
+		74C5D54027D1A681005A9550 /* PredicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredicationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +138,7 @@
 			children = (
 				74B551B127CEBC9A00BE3335 /* Core */,
 				74B551CF27CEEF0700BE3335 /* Extension */,
+				74C5D53E27D1A681005A9550 /* ValidationManager */,
 				7401199E27CFFF6600D1933C /* DI */,
 				740119A727D00C4C00D1933C /* FManabger */,
 				74B551B527CEBD1000BE3335 /* Scenes */,
@@ -183,10 +188,10 @@
 		74B551C227CEEAD600BE3335 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				74B551CC27CEEBD500BE3335 /* LoginVC.xib */,
+				74B551CB27CEEBD500BE3335 /* LoginVC.swift */,
 				74B551C727CEEB3D00BE3335 /* LoginViewModel.swift */,
 				74B551C927CEEB6100BE3335 /* Login+Injection.swift */,
-				74B551CB27CEEBD500BE3335 /* LoginVC.swift */,
-				74B551CC27CEEBD500BE3335 /* LoginVC.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -222,6 +227,15 @@
 				74B551D427CEFF2F00BE3335 /* UIView+EXT.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		74C5D53E27D1A681005A9550 /* ValidationManager */ = {
+			isa = PBXGroup;
+			children = (
+				74C5D53F27D1A681005A9550 /* ValidationManager.swift */,
+				74C5D54027D1A681005A9550 /* PredicationManager.swift */,
+			);
+			path = ValidationManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,6 +325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74C5D54127D1A681005A9550 /* ValidationManager.swift in Sources */,
 				74B551D527CEFF2F00BE3335 /* UIView+EXT.swift in Sources */,
 				7401199D27CFFF3700D1933C /* Forget+Injection.swift in Sources */,
 				740119AD27D00C4C00D1933C /* FirebaseWorker.swift in Sources */,
@@ -322,6 +337,7 @@
 				740119AB27D00C4C00D1933C /* AuthFirebaseLayer.swift in Sources */,
 				74B551DE27CF023A00BE3335 /* ForgetVC.swift in Sources */,
 				74B551CD27CEEBD500BE3335 /* LoginVC.swift in Sources */,
+				74C5D54227D1A681005A9550 /* PredicationManager.swift in Sources */,
 				7401199927CFFEE000D1933C /* ForgetViewModel.swift in Sources */,
 				740119A027CFFF7700D1933C /* RegisterAllContainer.swift in Sources */,
 				74B551CA27CEEB6100BE3335 /* Login+Injection.swift in Sources */,
@@ -477,6 +493,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -504,6 +521,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

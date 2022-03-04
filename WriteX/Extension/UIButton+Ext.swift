@@ -17,7 +17,7 @@ extension UIButton {
                                                                     ,.foregroundColor: UIColor.label])
         multiAttribute.append(NSAttributedString(string: txt2
                                                  , attributes: [.font: UIFont.systemFont(ofSize: 16)
-                                                                , .foregroundColor: UIColor.blue]))
+                                                                , .foregroundColor: UIColor.blue.withAlphaComponent(0.7)]))
         self.setAttributedTitle(multiAttribute, for: .normal)
     }
     

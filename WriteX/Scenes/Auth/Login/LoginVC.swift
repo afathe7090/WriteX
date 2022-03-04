@@ -35,7 +35,6 @@ class LoginVC: UIViewController {
         
         configureBinding()
         configureActions()
-
         configureRegisterButtonAttr()
         
     }
@@ -68,6 +67,7 @@ class LoginVC: UIViewController {
                 .receive(on: DispatchQueue.main)
                 .sink {[weak self] _ in
                     guard let self = self else { return }
+                    self.viewModel.configureValidation()
                     self.viewModel.signIn()
                 }.store(in: &self.cancelable)
         }
@@ -116,6 +116,8 @@ class LoginVC: UIViewController {
     private func configureBinding(){
         setTextFieldBinding()
         configurePresentationBinding()
+        configureAnimationForEmailTextField()
+        configureAnimationForPasswordTextField()
     }
     
     private func setTextFieldBinding(){
@@ -123,6 +125,20 @@ class LoginVC: UIViewController {
                                              , storeIn: &cancelable)
         passwordTextField.creatTextFieldBinding(with: viewModel.passwordPublisher
                                                 , storeIn: &cancelable)
+    }
+    
+    private func configureAnimationForEmailTextField(){
+        viewModel.animationEmailPublisher.sink {[ weak self ] state in
+            guard let self = self else { return}
+            if state { self.emailTextField.shakeField()}
+        }.store(in: &cancelable)
+    }
+    
+    private func configureAnimationForPasswordTextField(){
+        viewModel.animationaPassPublisher.sink {[ weak self ] state in
+            guard let self = self else { return}
+            if state { self.passwordTextField.shakeField()}
+        }.store(in: &cancelable)
     }
     
     private func configurePresentationBinding(){
@@ -135,9 +151,6 @@ class LoginVC: UIViewController {
                 }
         }.store(in: &cancelable)
     }
-    
-    
-    
 }
 
 //----------------------------------------------------------------------------------------------------------------
