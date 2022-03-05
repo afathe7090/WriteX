@@ -51,9 +51,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func configureAppWindow(){
         
-        guard let rootVC = container.resolve(LoginVC.self) else { return }
-        window?.rootViewController = UINavigationController(rootViewController: rootVC)
-        UINavigationBar.appearance().isHidden = true
+//        guard let rootVC = container.resolve(LoginVC.self) else { return }
+        window?.rootViewController = UINavigationController(rootViewController: BaseTabBar())
+//        UINavigationBar.appearance().isHidden = true
         window?.makeKeyAndVisible()
     }
 

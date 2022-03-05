@@ -11,11 +11,6 @@ import Combine
 enum loginPresentCases{
     case home
 }
-enum AnimationShanke{
-    case email
-    case password
-}
-
 
 class LoginViewModel {
     

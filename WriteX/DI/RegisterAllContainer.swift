@@ -18,6 +18,10 @@ extension Container {
         
         firebaseDependencyInjectionContainer()
         
+        
+        documentDiContainer()
+        
+        settingDIContainer()
     }
     
 }

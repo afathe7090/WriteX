@@ -101,34 +101,38 @@ class LoginVC: UIViewController {
     //----------------------------------------------------------------------------------------------------------------
     
     private func configureBinding(){
-        setTextFieldBinding()
-        configurePresentationBinding()
-        configureAnimationForEmailTextField()
-        configureAnimationForPasswordTextField()
+        Task {
+           await setTextFieldBinding()
+           await configurePresentationBinding()
+           await configureAnimationForEmailTextField()
+           await configureAnimationForPasswordTextField()
+        }
     }
     
-    private func setTextFieldBinding(){
-        emailTextField.creatTextFieldBinding(with: viewModel.emailPublisher
-                                             , storeIn: &cancelable)
-        passwordTextField.creatTextFieldBinding(with: viewModel.passwordPublisher
-                                                , storeIn: &cancelable)
+    private func setTextFieldBinding() async {
+        DispatchQueue.main.async {
+            self.emailTextField.creatTextFieldBinding(with: self.viewModel.emailPublisher
+                                                      , storeIn: &self.cancelable)
+            self.passwordTextField.creatTextFieldBinding(with: self.viewModel.passwordPublisher
+                                                         , storeIn: &self.cancelable)
+        }
     }
     
-    private func configureAnimationForEmailTextField(){
-        viewModel.animationEmailPublisher.sink {[ weak self ] state in
+    private func configureAnimationForEmailTextField() async {
+        viewModel.animationEmailPublisher.receive(on: DispatchQueue.main).sink {[ weak self ] state in
             guard let self = self else { return}
             if state { self.emailTextField.shakeField()}
         }.store(in: &cancelable)
     }
     
-    private func configureAnimationForPasswordTextField(){
-        viewModel.animationaPassPublisher.sink {[ weak self ] state in
+    private func configureAnimationForPasswordTextField() async {
+        viewModel.animationaPassPublisher.receive(on: DispatchQueue.main).sink {[ weak self ] state in
             guard let self = self else { return}
             if state { self.passwordTextField.shakeField()}
         }.store(in: &cancelable)
     }
     
-    private func configurePresentationBinding(){
+    private func configurePresentationBinding() async {
         viewModel.presentPublisher
             .receive(on: DispatchQueue.main)
             .sink { presentModel in

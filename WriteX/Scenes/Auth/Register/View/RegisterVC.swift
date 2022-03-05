@@ -70,7 +70,7 @@ class RegisterVC: UIViewController {
         DispatchQueue.main.async {
             self.registerButtonPressed.tapPublisher.receive(on: DispatchQueue.main)
                 .sink { _ in
-                    
+                    self.viewModel.signUp()
                 }.store(in: &self.cancelable)
         }
     }
@@ -96,9 +96,14 @@ class RegisterVC: UIViewController {
     }
     
     private func configureTextFieldBinding() async {
-        emailTextField.creatTextFieldBinding(with: viewModel.emailPublisher, storeIn: &cancelable)
-        passwordTextField.creatTextFieldBinding(with: viewModel.passwordPublisher, storeIn: &cancelable)
-        confirmPasswordTextField.creatTextFieldBinding(with: viewModel.confirmPasswordPublisher, storeIn: &cancelable)
+        DispatchQueue.main.async {
+            self.emailTextField.creatTextFieldBinding(with: self.viewModel.emailPublisher,
+                                                      storeIn: &self.cancelable)
+            self.passwordTextField.creatTextFieldBinding(with: self.viewModel.passwordPublisher,
+                                                         storeIn: &self.cancelable)
+            self.confirmPasswordTextField.creatTextFieldBinding(with: self.viewModel.confirmPasswordPublisher,
+                                                                storeIn: &self.cancelable)
+        }
     }
     
     private func configureEmailAnimation() async {
@@ -122,4 +127,14 @@ class RegisterVC: UIViewController {
     
     
     
+}
+
+//----------------------------------------------------------------------------------------------------------------
+//=======>MARK: -  Touch end
+//----------------------------------------------------------------------------------------------------------------
+extension RegisterVC{
+    override func touchesEnded(_ touches: Set<UITouch>
+                               , with event: UIEvent?) {
+        view.endEditing(true)
+    }
 }
