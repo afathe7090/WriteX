@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="AddCell" customModule="WriteX" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="207" height="200"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="207" height="200"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZOw-1S-zCd">
+                        <rect key="frame" x="0.0" y="0.0" width="207" height="200"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M9h-dk-xNz">
+                                <rect key="frame" x="10" y="10" width="187" height="180"/>
+                                <color key="backgroundColor" name="textFieldBackground"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="50"/>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" name="textFieldBackground"/>
+                        <constraints>
+                            <constraint firstItem="M9h-dk-xNz" firstAttribute="top" secondItem="ZOw-1S-zCd" secondAttribute="top" constant="10" id="06R-6I-7IG"/>
+                            <constraint firstAttribute="trailing" secondItem="M9h-dk-xNz" secondAttribute="trailing" constant="10" id="8CQ-tc-Gf1"/>
+                            <constraint firstItem="M9h-dk-xNz" firstAttribute="leading" secondItem="ZOw-1S-zCd" secondAttribute="leading" constant="10" id="Emh-eM-tsk"/>
+                            <constraint firstAttribute="bottom" secondItem="M9h-dk-xNz" secondAttribute="bottom" constant="10" id="mVL-p2-ysi"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ZOw-1S-zCd" secondAttribute="trailing" id="TiS-lq-Kcp"/>
+                <constraint firstItem="ZOw-1S-zCd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Vw0-0z-zDW"/>
+                <constraint firstItem="ZOw-1S-zCd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ixq-yL-DCu"/>
+                <constraint firstAttribute="bottom" secondItem="ZOw-1S-zCd" secondAttribute="bottom" id="qVz-Mc-3Jg"/>
+            </constraints>
+            <size key="customSize" width="207" height="200"/>
+            <connections>
+                <outlet property="addButton" destination="M9h-dk-xNz" id="LoT-dN-OZD"/>
+                <outlet property="backView" destination="ZOw-1S-zCd" id="JfY-kC-J7o"/>
+            </connections>
+            <point key="canvasLocation" x="250.00000000000003" y="178.125"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <namedColor name="textFieldBackground">
+            <color red="0.99599999189376831" green="0.99599999189376831" blue="0.99599999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

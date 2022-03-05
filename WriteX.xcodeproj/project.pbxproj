@@ -20,6 +20,14 @@
 		740119B427D00E6700D1933C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 740119B327D00E6700D1933C /* FirebaseFirestore */; };
 		740119B627D00E6700D1933C /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 740119B527D00E6700D1933C /* FirebaseStorage */; };
 		740119BA27D0227F00D1933C /* TextField+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740119B927D0227F00D1933C /* TextField+Publisher.swift */; };
+		7413C2D827D3CFEE000209D7 /* UICollectionView + Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7413C2D727D3CFEE000209D7 /* UICollectionView + Publisher.swift */; };
+		7413C2DC27D3E7E7000209D7 /* CustomCollectionViewLayOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7413C2DB27D3E7E7000209D7 /* CustomCollectionViewLayOut.swift */; };
+		7413C2DE27D3F9D2000209D7 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7413C2DD27D3F9D2000209D7 /* HelperFunctions.swift */; };
+		746A02AE27D3B93B0027F290 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746A02AD27D3B93B0027F290 /* Notes.swift */; };
+		746A02B227D3BFD70027F290 /* NotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746A02B027D3BFD70027F290 /* NotesCell.swift */; };
+		746A02B327D3BFD70027F290 /* NotesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 746A02B127D3BFD70027F290 /* NotesCell.xib */; };
+		746A02B627D3BFF30027F290 /* AddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746A02B427D3BFF30027F290 /* AddCell.swift */; };
+		746A02B727D3BFF30027F290 /* AddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 746A02B527D3BFF30027F290 /* AddCell.xib */; };
 		7490F0B227D12DBE003AA1B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7490F0B127D12DBE003AA1B5 /* GoogleService-Info.plist */; };
 		7490F0B527D15AC0003AA1B5 /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7490F0B427D15AC0003AA1B5 /* UIButton+Ext.swift */; };
 		74B5519E27CEB9E600BE3335 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B5519D27CEB9E600BE3335 /* AppDelegate.swift */; };
@@ -60,6 +68,14 @@
 		740119A927D00C4C00D1933C /* Firebase+Injection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Firebase+Injection.swift"; sourceTree = "<group>"; };
 		740119AA27D00C4C00D1933C /* FirebaseWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseWorker.swift; sourceTree = "<group>"; };
 		740119B927D0227F00D1933C /* TextField+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+Publisher.swift"; sourceTree = "<group>"; };
+		7413C2D727D3CFEE000209D7 /* UICollectionView + Publisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Publisher.swift"; sourceTree = "<group>"; };
+		7413C2DB27D3E7E7000209D7 /* CustomCollectionViewLayOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewLayOut.swift; sourceTree = "<group>"; };
+		7413C2DD27D3F9D2000209D7 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
+		746A02AD27D3B93B0027F290 /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
+		746A02B027D3BFD70027F290 /* NotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesCell.swift; sourceTree = "<group>"; };
+		746A02B127D3BFD70027F290 /* NotesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesCell.xib; sourceTree = "<group>"; };
+		746A02B427D3BFF30027F290 /* AddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCell.swift; sourceTree = "<group>"; };
+		746A02B527D3BFF30027F290 /* AddCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCell.xib; sourceTree = "<group>"; };
 		7490F0B127D12DBE003AA1B5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7490F0B427D15AC0003AA1B5 /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
 		74B5519A27CEB9E600BE3335 /* WriteX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WriteX.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,9 +146,38 @@
 		740119B827D0226E00D1933C /* Publisher */ = {
 			isa = PBXGroup;
 			children = (
+				7413C2D727D3CFEE000209D7 /* UICollectionView + Publisher.swift */,
 				740119B927D0227F00D1933C /* TextField+Publisher.swift */,
 			);
 			path = Publisher;
+			sourceTree = "<group>";
+		};
+		7413C2DA27D3E7D8000209D7 /* Helper  */ = {
+			isa = PBXGroup;
+			children = (
+				7413C2DB27D3E7E7000209D7 /* CustomCollectionViewLayOut.swift */,
+				7413C2DD27D3F9D2000209D7 /* HelperFunctions.swift */,
+			);
+			path = "Helper ";
+			sourceTree = "<group>";
+		};
+		746A02AC27D3B9290027F290 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				746A02AD27D3B93B0027F290 /* Notes.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		746A02AF27D3BFB30027F290 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				746A02B427D3BFF30027F290 /* AddCell.swift */,
+				746A02B527D3BFF30027F290 /* AddCell.xib */,
+				746A02B027D3BFD70027F290 /* NotesCell.swift */,
+				746A02B127D3BFD70027F290 /* NotesCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		74A9332827D2E4FC004FFDA0 /* View */ = {
@@ -188,6 +233,7 @@
 		74A9332E27D2EE2E004FFDA0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				746A02AF27D3BFB30027F290 /* Cells */,
 				74B824F127D2687A00B4ED82 /* DocumentVC.xib */,
 				74B824F027D2687A00B4ED82 /* DocumentVC.swift */,
 			);
@@ -254,6 +300,7 @@
 		74B5519C27CEB9E600BE3335 /* WriteX */ = {
 			isa = PBXGroup;
 			children = (
+				7413C2DA27D3E7D8000209D7 /* Helper  */,
 				74B551B127CEBC9A00BE3335 /* Core */,
 				74B551CF27CEEF0700BE3335 /* Extension */,
 				74C5D53E27D1A681005A9550 /* ValidationManager */,
@@ -359,6 +406,7 @@
 		74B824EE27D2684900B4ED82 /* Document */ = {
 			isa = PBXGroup;
 			children = (
+				746A02AC27D3B9290027F290 /* Model */,
 				74A9333027D2EE3A004FFDA0 /* DI */,
 				74A9332F27D2EE34004FFDA0 /* ViewModel */,
 				74A9332E27D2EE2E004FFDA0 /* View */,
@@ -459,11 +507,13 @@
 				74B551DF27CF023A00BE3335 /* ForgetVC.xib in Resources */,
 				74B824FB27D268BF00B4ED82 /* SettingsVC.xib in Resources */,
 				74B551AA27CEB9E800BE3335 /* LaunchScreen.storyboard in Resources */,
+				746A02B727D3BFF30027F290 /* AddCell.xib in Resources */,
 				74B551D927CF020D00BE3335 /* RegisterVC.xib in Resources */,
 				74B551A727CEB9E800BE3335 /* Assets.xcassets in Resources */,
 				74B551CE27CEEBD500BE3335 /* LoginVC.xib in Resources */,
 				74B824F327D2687A00B4ED82 /* DocumentVC.xib in Resources */,
 				7490F0B227D12DBE003AA1B5 /* GoogleService-Info.plist in Resources */,
+				746A02B327D3BFD70027F290 /* NotesCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,18 +531,24 @@
 				7401199D27CFFF3700D1933C /* Forget+Injection.swift in Sources */,
 				740119AD27D00C4C00D1933C /* FirebaseWorker.swift in Sources */,
 				74B824F527D2688600B4ED82 /* DocumentViewModel.swift in Sources */,
+				7413C2D827D3CFEE000209D7 /* UICollectionView + Publisher.swift in Sources */,
 				740119AC27D00C4C00D1933C /* Firebase+Injection.swift in Sources */,
 				74B551D827CF020D00BE3335 /* RegisterVC.swift in Sources */,
 				7401199B27CFFF0500D1933C /* Register+Injection.swift in Sources */,
 				74B5519E27CEB9E600BE3335 /* AppDelegate.swift in Sources */,
 				7490F0B527D15AC0003AA1B5 /* UIButton+Ext.swift in Sources */,
+				7413C2DE27D3F9D2000209D7 /* HelperFunctions.swift in Sources */,
+				746A02AE27D3B93B0027F290 /* Notes.swift in Sources */,
 				740119AB27D00C4C00D1933C /* AuthFirebaseLayer.swift in Sources */,
 				74B824FA27D268BF00B4ED82 /* SettingsVC.swift in Sources */,
+				746A02B227D3BFD70027F290 /* NotesCell.swift in Sources */,
 				74B551DE27CF023A00BE3335 /* ForgetVC.swift in Sources */,
 				74B551CD27CEEBD500BE3335 /* LoginVC.swift in Sources */,
 				74B824F227D2687A00B4ED82 /* DocumentVC.swift in Sources */,
 				74C5D54227D1A681005A9550 /* PredicationManager.swift in Sources */,
 				7401199927CFFEE000D1933C /* ForgetViewModel.swift in Sources */,
+				7413C2DC27D3E7E7000209D7 /* CustomCollectionViewLayOut.swift in Sources */,
+				746A02B627D3BFF30027F290 /* AddCell.swift in Sources */,
 				740119A027CFFF7700D1933C /* RegisterAllContainer.swift in Sources */,
 				74B551CA27CEEB6100BE3335 /* Login+Injection.swift in Sources */,
 				74B824FF27D268D300B4ED82 /* Settings+Inject.swift in Sources */,
@@ -649,7 +705,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -677,7 +733,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

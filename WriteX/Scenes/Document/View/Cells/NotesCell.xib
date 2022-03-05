@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="NotesCell" customModule="WriteX" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="238" height="212"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="238" height="212"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m3K-st-JMj">
+                        <rect key="frame" x="0.0" y="0.0" width="238" height="212"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="juk-po-90A">
+                                <rect key="frame" x="198" y="10" width="35" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="Kvp-GT-ULu"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="slider.horizontal.3" catalog="system"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="March 5, 2022 at 10:06 PM" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Gk-Gg-EiG">
+                                <rect key="frame" x="10" y="15" width="178" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notesdf " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0d2-1T-rlP">
+                                <rect key="frame" x="10" y="46" width="218" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dasdsadasdasd s fwef sdf sdfs dfsdfsdfdsfsddf " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CBL-vh-2jn">
+                                <rect key="frame" x="10" y="77" width="218" height="33.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="textFieldBackground"/>
+                        <constraints>
+                            <constraint firstItem="8Gk-Gg-EiG" firstAttribute="leading" secondItem="m3K-st-JMj" secondAttribute="leading" constant="10" id="0qR-af-FWH"/>
+                            <constraint firstItem="0d2-1T-rlP" firstAttribute="top" secondItem="8Gk-Gg-EiG" secondAttribute="bottom" constant="15" id="1sS-wk-fZw"/>
+                            <constraint firstItem="juk-po-90A" firstAttribute="leading" secondItem="8Gk-Gg-EiG" secondAttribute="trailing" constant="10" id="SHX-ZE-H3B"/>
+                            <constraint firstAttribute="trailing" secondItem="0d2-1T-rlP" secondAttribute="trailing" constant="10" id="TsH-P5-6AY"/>
+                            <constraint firstItem="0d2-1T-rlP" firstAttribute="leading" secondItem="m3K-st-JMj" secondAttribute="leading" constant="10" id="b86-l9-1Cf"/>
+                            <constraint firstItem="CBL-vh-2jn" firstAttribute="top" secondItem="0d2-1T-rlP" secondAttribute="bottom" constant="10" id="bCI-Eq-OLw"/>
+                            <constraint firstItem="juk-po-90A" firstAttribute="top" secondItem="m3K-st-JMj" secondAttribute="top" constant="10" id="dkt-3i-e5g"/>
+                            <constraint firstItem="CBL-vh-2jn" firstAttribute="leading" secondItem="m3K-st-JMj" secondAttribute="leading" constant="10" id="dmn-mZ-JYC"/>
+                            <constraint firstAttribute="trailing" secondItem="juk-po-90A" secondAttribute="trailing" constant="5" id="fCQ-91-NIt"/>
+                            <constraint firstItem="8Gk-Gg-EiG" firstAttribute="top" secondItem="m3K-st-JMj" secondAttribute="top" constant="15" id="fgk-Cz-WMz"/>
+                            <constraint firstAttribute="trailing" secondItem="CBL-vh-2jn" secondAttribute="trailing" constant="10" id="svx-cS-CbR"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="m3K-st-JMj" secondAttribute="bottom" id="T2n-tW-5wP"/>
+                <constraint firstAttribute="trailing" secondItem="m3K-st-JMj" secondAttribute="trailing" id="YHL-Cm-Zyj"/>
+                <constraint firstItem="m3K-st-JMj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="by2-VZ-PWD"/>
+                <constraint firstItem="m3K-st-JMj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="gER-3a-mis"/>
+            </constraints>
+            <size key="customSize" width="238" height="212"/>
+            <connections>
+                <outlet property="backView" destination="m3K-st-JMj" id="GkZ-Dy-p7G"/>
+                <outlet property="dateOfNotes" destination="8Gk-Gg-EiG" id="I7h-hr-gqP"/>
+                <outlet property="descriptionOfNote" destination="CBL-vh-2jn" id="h82-Yo-gMw"/>
+                <outlet property="titleOfNotes" destination="0d2-1T-rlP" id="bqv-BG-zbk"/>
+            </connections>
+            <point key="canvasLocation" x="273.91304347826087" y="182.14285714285714"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
+        <namedColor name="textFieldBackground">
+            <color red="0.99599999189376831" green="0.99599999189376831" blue="0.99599999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
