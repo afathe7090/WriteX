@@ -43,3 +43,23 @@ extension UITextField {
     
     
 }
+
+extension UITextView {
+    
+    func creatTextViewBinding(with subject: CurrentValueSubject<String, Never> ,
+                               storeIn subscripations: inout Set<AnyCancellable>){
+         
+         subject.sink { [weak self] value in
+             if value != self?.text {
+                 self?.text = value
+             }
+         }.store(in: &subscripations)
+         
+         
+         self.textPublisher.sink { value in
+             if value != subject.value {
+                 subject.send(value!)
+             }
+         }.store(in: &subscripations)
+    }
+}

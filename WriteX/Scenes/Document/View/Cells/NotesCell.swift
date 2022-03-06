@@ -21,7 +21,7 @@ class NotesCell: UICollectionViewCell {
         // Initialization code
     }
     
-    func setCell(_ note: Notes){
+    func setCell(_ note: Note){
         titleOfNotes.text      = note.title
         descriptionOfNote.text = note.description
         dateOfNotes.text       = note.date

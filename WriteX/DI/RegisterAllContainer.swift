@@ -22,6 +22,8 @@ extension Container {
         documentDiContainer()
         
         settingDIContainer()
+        
+        addNotesDIContainer()
     }
     
 }

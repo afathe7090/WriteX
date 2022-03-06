@@ -12,18 +12,25 @@ import Combine
 class DocumentViewModel {
     
     
-    let notesPublisher = CurrentValueSubject<[Notes],Never>([Notes]())
+    var notesPublisher = CurrentValueSubject<[Note],Never>([Note]())
+    var filterPublisher = CurrentValueSubject<[Note],Never>([Note]())
+    
+    private var cancelable = Set<AnyCancellable>()
     
     var firebase: FirebaseWorker!
+
+    init(){}
     
-    func configureDataPublisher(){
-        let notes:[Notes] = [.init(title: "ljflkdsjf", description: "fkjlsjdljsdlkf", date: getCurrentData()),
-                             .init(title: "ljflkdsjf", description: "fkjlsjdljsdlkf", date: getCurrentData()),
-                             .init(title: "ljflkdsjf", description: "fkjlsjdljsdlkf", date: getCurrentData()),
-                             .init(title: "ljflkdsjf", description: "fkjlsjdljsdlkf", date: getCurrentData()),
-                             .init(title: "ljflkdsjf", description: "fkjlsjdljsdlkf", date: getCurrentData())]
+    func handelDataBackLocally(){
+        guard let notes = getNotesLocaly() else { return }
         notesPublisher.send(notes)
     }
     
-    init(){}
+    func handelDataLocaly(){
+        notesPublisher.sink { notes in
+            saveNotesLocaly(notes)
+        }.store(in: &cancelable)
+    }
+    
 }
+

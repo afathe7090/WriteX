@@ -8,8 +8,9 @@
 import Foundation
 
 
-struct Notes: Codable{
+struct Note: Codable, Equatable{
     let title: String
     let description: String
     let date: String
+    var isHidden = false
 }
