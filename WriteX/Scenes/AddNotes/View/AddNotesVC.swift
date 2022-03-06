@@ -10,7 +10,7 @@ import Combine
 import CombineCocoa
 
 protocol AddNoteProtocol:AnyObject {
-    func confirmNoteView(_ note: Note)
+    func confirmNoteView(_ note: Note, index: Int)
 }
 
 class AddNotesVC: UIViewController {
@@ -83,8 +83,9 @@ class AddNotesVC: UIViewController {
     
     func configureSaveButtonAction()async {
         DispatchQueue.main.async {
-            self.saveButtonItem.tapPublisher.sink { _ in
-                self.delegate?.retutnNotesSaved(self.viewModel.confirmNotes())
+            self.saveButtonItem.tapPublisher.receive(on: DispatchQueue.main).sink { _ in
+                // return note
+                self.delegate?.retutnNotesSaved(self.viewModel.confirmNotes(), editedIndex: self.viewModel.indexNote)
                 self.dismiss(animated: true, completion: nil)
             }.store(in: &self.cancelable)
         }
@@ -129,7 +130,8 @@ extension AddNotesVC: UITextViewDelegate {
 
  //MARK: - Confirm Combing Edit Note
 extension AddNotesVC: AddNoteProtocol{
-    func confirmNoteView(_ note: Note) {
+    func confirmNoteView(_ note: Note, index: Int) {
         viewModel.note.send(note)
+        viewModel.indexNote = index
     }
 }

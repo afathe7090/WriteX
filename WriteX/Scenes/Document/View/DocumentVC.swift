@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 protocol GetNotesProtocol: AnyObject{
-    func retutnNotesSaved(_ note: Note?)
+    func retutnNotesSaved(_ note: Note, editedIndex: Int)
 }
 
 
@@ -87,7 +87,7 @@ extension DocumentVC: UISearchResultsUpdating{
     }
 }
 
- //MARK: - Collection VIew Protocols
+//MARK: - Collection VIew Protocols
 extension DocumentVC: UICollectionViewDataSource, UICollectionViewDelegate {
     
     
@@ -127,21 +127,23 @@ extension DocumentVC: UICollectionViewDataSource, UICollectionViewDelegate {
         navigationVC.modalPresentationStyle = .fullScreen
         weak var delegate: AddNoteProtocol?
         
-        if indexPath.row == 0 {
-            addNoteVC.delegate = self
-        }else{
-            delegate = addNoteVC
-            let note = searchController.isActive == true ? viewModel.filterPublisher.value[indexPath.row]:viewModel.notesPublisher.value[indexPath.row - 1]
-            delegate?.confirmNoteView(note)
-            
-        }
+        addNoteVC.delegate = self
+        delegate = addNoteVC
+        
+        // Note that selected
+        let note = searchController.isActive == true ? viewModel.filterPublisher.value[indexPath.row]:viewModel.notesPublisher.value[indexPath.row - 1]
+        
+        // index note that will editing
+        let indexNote = searchController.isActive == true ? indexPath.row:indexPath.row - 1
+        delegate?.confirmNoteView(note ,index: indexNote)
         present(navigationVC, animated: true)
     }
 }
 
 extension DocumentVC: GetNotesProtocol {
-    func retutnNotesSaved(_ note: Note?) {
-        //        print(note)
-        if let note = note { viewModel.notesPublisher.value.append(note) }
+    func retutnNotesSaved(_ note: Note, editedIndex: Int) {
+        viewModel.notesPublisher.value.remove(at: editedIndex)
+        viewModel.notesPublisher.value.insert(note, at: editedIndex)
     }
+    
 }
