@@ -127,23 +127,33 @@ extension DocumentVC: UICollectionViewDataSource, UICollectionViewDelegate {
         navigationVC.modalPresentationStyle = .fullScreen
         weak var delegate: AddNoteProtocol?
         
-        addNoteVC.delegate = self
+        
         delegate = addNoteVC
+        addNoteVC.delegate = self
+
+        if indexPath.row == 0{
+            viewModel.isEditting = false
+        }else{
+            // Note that selected
+            let note = searchController.isActive == true ? viewModel.filterPublisher.value[indexPath.row]:viewModel.notesPublisher.value[indexPath.row - 1]
+            
+            // index note that will editing
+            let indexNote = searchController.isActive == true ? indexPath.row:indexPath.row - 1
+            delegate?.confirmNoteView(note ,index: indexNote)
+            
+            viewModel.isEditting = true
+        }
         
-        // Note that selected
-        let note = searchController.isActive == true ? viewModel.filterPublisher.value[indexPath.row]:viewModel.notesPublisher.value[indexPath.row - 1]
         
-        // index note that will editing
-        let indexNote = searchController.isActive == true ? indexPath.row:indexPath.row - 1
-        delegate?.confirmNoteView(note ,index: indexNote)
         present(navigationVC, animated: true)
     }
 }
 
 extension DocumentVC: GetNotesProtocol {
     func retutnNotesSaved(_ note: Note, editedIndex: Int) {
-        viewModel.notesPublisher.value.remove(at: editedIndex)
-        viewModel.notesPublisher.value.insert(note, at: editedIndex)
+        if viewModel.isEditting { viewModel.notesPublisher.value.remove(at: editedIndex) }
+        print(note)
+        viewModel.notesPublisher.value.insert(note, at: 0)
     }
     
 }

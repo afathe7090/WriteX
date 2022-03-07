@@ -25,7 +25,6 @@ class AddNotesViewModel {
     
     
     func confirmNotes()-> Note {
-//         titleNote.value != "" , discriptionNote.value != "" 
         let note = Note(title: titleNote.value
                         , description: discriptionNote.value
                         , date: getCurrentData())

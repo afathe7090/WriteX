@@ -8,9 +8,9 @@
 import Foundation
 import Combine
 
-
 class DocumentViewModel {
     
+    @Published var isEditting = false
     
     var notesPublisher = CurrentValueSubject<[Note],Never>([Note]())
     var filterPublisher = CurrentValueSubject<[Note],Never>([Note]())
