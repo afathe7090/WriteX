@@ -10,3 +10,4 @@ import Foundation
 let defaults = UserDefaults.standard
 
 let kNOTES = "NOTESDEFAULT"
+let kCOUNTER = "COUNTER"

@@ -8,9 +8,10 @@
 import Foundation
 
 
-struct Note: Codable, Equatable{
-    let title: String
-    let description: String
-    let date: String
-    var isHidden = false
+struct Note: Codable, Equatable, Hashable{
+    var id          = UUID()
+    let title       : String
+    let description : String
+    let date        : String
+    var isHidden    = false
 }

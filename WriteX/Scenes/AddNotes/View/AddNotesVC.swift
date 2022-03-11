@@ -9,20 +9,33 @@ import UIKit
 import Combine
 import CombineCocoa
 
-protocol AddNoteProtocol:AnyObject {
-    func confirmNoteView(_ note: Note, index: Int)
+enum StateOfAddNote{
+    case add
+    case edit
 }
+
+protocol ConfirmEditNote: AnyObject {
+    // Note That Done
+    func configureNote (_ note: Note)
+}
+
+protocol ConfirmAddNote: AnyObject {
+    func confirmAddNote(note: Note)
+}
+
 
 class AddNotesVC: UIViewController {
     
     var viewModel: AddNotesViewModel!
     var cancelable = Set<AnyCancellable>()
-    weak var delegate: GetNotesProtocol?
+    weak var delegate: ConfirmAddNote!
+    
     //MARK: - Outlet
     
     @IBOutlet weak var titleTextField: UITextField! { didSet { titleTextField.layer.cornerRadius = 5}}
     @IBOutlet weak var discriptionTextView: UITextView!{ didSet { discriptionTextView.layer.cornerRadius = 10}}
     @IBOutlet weak var heightOfTextView: NSLayoutConstraint!
+    
     private let saveButtonItem   = UIBarButtonItem(title: "Save", style: .done, target: nil, action: nil)
     private let cancelButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: nil, action: nil)
     
@@ -30,9 +43,9 @@ class AddNotesVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTextView()
-        
-        configureFieldsBindingFromViewModel()
+        bindToSetupTitle()
         bindFieldsToViewModel()
+        bindToSetFields()
         
         configureNavigationBar()
         
@@ -62,15 +75,24 @@ class AddNotesVC: UIViewController {
         discriptionTextView.creatTextViewBinding(with: viewModel.discriptionNote, storeIn: &cancelable)
     }
     
-    func configureFieldsBindingFromViewModel(){
-        viewModel.note
-            .receive(on: DispatchQueue.main)
-            .sink { note in
-                self.title = note == nil ? "Add Note":"Edit Note"
-                self.titleTextField.text = note?.title
-                self.discriptionTextView.text = note == nil ? "Enter Discription":note?.description
-            }.store(in: &cancelable)
+    func bindToSetupTitle(){
+        viewModel.$stateOfView.sink { state in
+            switch state {
+            case .add:
+                self.title = "Add Note"
+            case .edit:
+                self.title = "Edit Note"
+            }
+        }.store(in: &cancelable)
     }
+    
+    func bindToSetFields(){
+        viewModel.$note.sink { note in
+            self.titleTextField.text = note?.title
+            self.discriptionTextView.text = note?.description
+        }.store(in: &cancelable)
+    }
+    
      //MARK: - Actions
     
     func configureBarButton(){
@@ -80,12 +102,13 @@ class AddNotesVC: UIViewController {
         }
     }
     
-    
     func configureSaveButtonAction()async {
         DispatchQueue.main.async {
             self.saveButtonItem.tapPublisher.receive(on: DispatchQueue.main).sink { _ in
                 // return note
-                self.delegate?.retutnNotesSaved(self.viewModel.confirmNotes(), editedIndex: self.viewModel.indexNote)
+//                self.viewModel.configureNote()
+                let note = Note(title: self.viewModel.titleNote.value, description: self.viewModel.discriptionNote.value, date: getCurrentData())
+                self.delegate.confirmAddNote(note: note)
                 self.dismiss(animated: true, completion: nil)
             }.store(in: &self.cancelable)
         }
@@ -98,6 +121,8 @@ class AddNotesVC: UIViewController {
             }.store(in: &self.cancelable)
         }
     }
+    
+
     
     
 }
@@ -112,12 +137,12 @@ extension AddNotesVC: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        viewModel.note
-            .receive(on: DispatchQueue.main)
-            .sink { note in
-                textView.text = (textView.text == "Enter Discription" && self.title == "Add Note") ?  nil:note?.description
-                textView.textColor = .label
-            }.store(in: &cancelable)
+//        viewModel.note
+//            .receive(on: DispatchQueue.main)
+//            .sink { note in
+//                textView.text = (textView.text == "Enter Discription" && self.title == "Add Note") ?  nil:note?.description
+//                textView.textColor = .label
+//            }.store(in: &cancelable)
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -128,10 +153,9 @@ extension AddNotesVC: UITextViewDelegate {
     }
 }
 
- //MARK: - Confirm Combing Edit Note
-extension AddNotesVC: AddNoteProtocol{
-    func confirmNoteView(_ note: Note, index: Int) {
-        viewModel.note.send(note)
-        viewModel.indexNote = index
+extension AddNotesVC: ConfirmEditNote {
+    func configureNote(_ note: Note) {
+        viewModel.stateOfView = .edit
+        viewModel.note = note
     }
 }

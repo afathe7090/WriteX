@@ -7,13 +7,10 @@
 
 import UIKit
 import Combine
-
-protocol GetNotesProtocol: AnyObject{
-    func retutnNotesSaved(_ note: Note, editedIndex: Int)
-}
-
+import CombineCocoa
 
 class DocumentVC: UIViewController {
+    
     
     //----------------------------------------------------------------------------------------------------------------
     //=======>MARK: -  Data Type
@@ -23,11 +20,12 @@ class DocumentVC: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    
     //----------------------------------------------------------------------------------------------------------------
     //=======>MARK: -  UI
     //----------------------------------------------------------------------------------------------------------------
     private let searchController = UISearchController(searchResultsController: nil)
-    
+    weak var delegate: ConfirmEditNote!
     
     //----------------------------------------------------------------------------------------------------------------
     //=======>MARK: -  Lyfe Cycle
@@ -35,10 +33,8 @@ class DocumentVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Document"
-        viewModel.handelDataBackLocally()
-        viewModel.handelDataLocaly()
+        viewModel.getNotesLocalley()
         configureSearchController()
-        configureUpdateCollectionView()
         configureCollectionViewCells()
     }
     
@@ -62,13 +58,7 @@ class DocumentVC: UIViewController {
         collectionView.register(UINib(nibName: NotesCell.cellID, bundle: nil), forCellWithReuseIdentifier: NotesCell.cellID)
     }
     
-    func configureUpdateCollectionView(){
-        viewModel.notesPublisher.sink { _ in
-            self.collectionView.reloadData()
-        }.store(in: &cancelable)
-    }
-    
-    
+
 }
 
 
@@ -77,12 +67,7 @@ class DocumentVC: UIViewController {
 //----------------------------------------------------------------------------------------------------------------
 extension DocumentVC: UISearchResultsUpdating{
     func updateSearchResults(for searchController: UISearchController) {
-        viewModel.notesPublisher
-            .map { $0.filter { $0.title.lowercased().contains(searchController.searchBar.text!.lowercased()) }
-            }.sink { notes in
-                self.viewModel.filterPublisher.value = notes
-            }.store(in: &cancelable)
-        
+        viewModel.filterNotesBy(searchText: searchController.searchBar.text!)
         collectionView.reloadData()
     }
 }
@@ -93,7 +78,7 @@ extension DocumentVC: UICollectionViewDataSource, UICollectionViewDelegate {
     
     //MARK: - Number of rows
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchController.isActive == false ? viewModel.notesPublisher.value.count + 1:viewModel.filterPublisher.value.count
+        return searchController.isActive == false ? viewModel.notesPublisher.map({$0.isHidden == false}).count + 1:viewModel.filterPublisher.map({$0.isHidden == false}).count
     }
     
     
@@ -109,7 +94,7 @@ extension DocumentVC: UICollectionViewDataSource, UICollectionViewDelegate {
         }else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NotesCell.cellID,
                                                           for: indexPath) as! NotesCell
-            let note = searchController.isActive == true ? viewModel.filterPublisher.value[indexPath.row]:viewModel.notesPublisher.value[indexPath.row - 1]
+            let note = searchController.isActive == true ? viewModel.filterPublisher[indexPath.row]:viewModel.notesPublisher[indexPath.row - 1]
             cell.setCell(note)
             return cell
         }
@@ -117,43 +102,38 @@ extension DocumentVC: UICollectionViewDataSource, UICollectionViewDelegate {
     
     
     
+    
+    
     //MARK: - DidSelect
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        
-        guard let addNoteVC = container.resolve(AddNotesVC.self) else { return }
-        let navigationVC = UINavigationController(rootViewController: addNoteVC)
+        guard let addNote = container.resolve(AddNotesVC.self) else { return }
+        let navigationVC = UINavigationController(rootViewController: addNote)
         navigationVC.modalPresentationStyle = .fullScreen
-        weak var delegate: AddNoteProtocol?
-        
-        
-        delegate = addNoteVC
-        addNoteVC.delegate = self
-
-        if indexPath.row == 0{
+        delegate = addNote
+        addNote.delegate = self
+        // Note Save the UUID For the Edit Cell
+        if indexPath.row == 0 , searchController.isActive == false {
+            // present with add Note that is active when the searchController is not active
             viewModel.isEditting = false
         }else{
-            // Note that selected
-            let note = searchController.isActive == true ? viewModel.filterPublisher.value[indexPath.row]:viewModel.notesPublisher.value[indexPath.row - 1]
-            
-            // index note that will editing
-            let indexNote = searchController.isActive == true ? indexPath.row:indexPath.row - 1
-            delegate?.confirmNoteView(note ,index: indexNote)
-            
+            // present with Edit Note in all time active SearchController OR Not
             viewModel.isEditting = true
+            let note = searchController.isActive == true ? viewModel.filterPublisher[indexPath.row]:viewModel.notesPublisher[indexPath.row - 1]
+            viewModel.edittingNote = note
+            delegate?.configureNote(note)
         }
-        
         
         present(navigationVC, animated: true)
     }
+    
 }
 
-extension DocumentVC: GetNotesProtocol {
-    func retutnNotesSaved(_ note: Note, editedIndex: Int) {
-        if viewModel.isEditting { viewModel.notesPublisher.value.remove(at: editedIndex) }
-        print(note)
-        viewModel.notesPublisher.value.insert(note, at: 0)
+// Set Editting Note or Add
+extension DocumentVC: ConfirmAddNote {
+    func confirmAddNote(note: Note) {
+        viewModel.setEdittingOrAddingNote(note)
+        collectionView.reloadData()
     }
-    
 }

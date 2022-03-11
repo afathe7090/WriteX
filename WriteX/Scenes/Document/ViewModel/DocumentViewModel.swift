@@ -11,25 +11,37 @@ import Combine
 class DocumentViewModel {
     
     @Published var isEditting = false
-    
-    var notesPublisher = CurrentValueSubject<[Note],Never>([Note]())
-    var filterPublisher = CurrentValueSubject<[Note],Never>([Note]())
+    @Published var notesPublisher = [Note]()
+    @Published var filterPublisher = [Note]()
+    @Published var edittingNote: Note? = nil
     
     private var cancelable = Set<AnyCancellable>()
     
     var firebase: FirebaseWorker!
 
-    init(){}
+    init(){ }
     
-    func handelDataBackLocally(){
+   
+    
+    func getNotesLocalley(){
         guard let notes = getNotesLocaly() else { return }
-        notesPublisher.send(notes)
+        notesPublisher = notes
     }
     
-    func handelDataLocaly(){
-        notesPublisher.sink { notes in
-            saveNotesLocaly(notes)
-        }.store(in: &cancelable)
+    // Search View Controller Handelr Search
+    func filterNotesBy(searchText: String){
+        $notesPublisher
+            .map { $0.filter { $0.title.lowercased().contains(searchText.lowercased()) }
+            }.sink { notes in
+                self.filterPublisher = notes
+            }.store(in: &cancelable)
+    }
+    
+    
+    func setEdittingOrAddingNote(_ note: Note){
+        if isEditting { notesPublisher.remove(element: edittingNote!)}
+        notesPublisher.insert(note, at: 0)
+        saveNotesLocaly(notesPublisher)
     }
     
 }
