@@ -37,7 +37,7 @@ class NotesCell: UICollectionViewCell {
     
     func configureMenuButtonAntion(){
         menuButtonCell.tapPublisher.sink { _ in
-            self.delegate?.presentAlert()
+            self.delegate?.presentAlert(self.menuButtonCell.tag)
         }.store(in: &cancelable)
     }
 

@@ -30,7 +30,7 @@ extension DocumentVC: UICollectionViewDataSource, UICollectionViewDelegate {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NotesCell.cellID,
                                                           for: indexPath) as! NotesCell
             cell.delegate = self
-            viewModel.setUpNotesCell(cell, indexPath: indexPath)
+            viewModel.setUpNotesCell(cell, index: indexPath.row)
             return cell
         }
     }
@@ -50,7 +50,7 @@ extension DocumentVC: UICollectionViewDataSource, UICollectionViewDelegate {
         if indexPath.row == 0 , viewModel.searchBarActive == false {
             viewModel.isEditting = false
         }else{
-            delegate?.configureNote(viewModel.presentedNote(indexPath: indexPath))
+            delegate?.configureNote(viewModel.presentedNote(index: indexPath.row))
         }
         present(navigationVC, animated: true)
     }
