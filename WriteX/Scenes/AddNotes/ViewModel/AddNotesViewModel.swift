@@ -23,5 +23,10 @@ class AddNotesViewModel {
     
      //MARK: - Helper Functions
 
+    func changeStateOfButton()-> AnyPublisher<Bool,Never> {
+        return Publishers.CombineLatest(titleNote, discriptionNote).map{ (title, discribtion) in
+            return title == "" && discribtion == ""
+        }.eraseToAnyPublisher()
+    }
     
 }

@@ -19,9 +19,6 @@ protocol ConfirmEditNote: AnyObject {
     func configureNote (_ note: Note)
 }
 
-protocol ConfirmAddNote: AnyObject {
-    func confirmAddNote(note: Note)
-}
 
 
 class AddNotesVC: UIViewController {
@@ -46,9 +43,8 @@ class AddNotesVC: UIViewController {
         bindToSetupTitle()
         bindFieldsToViewModel()
         bindToSetFields()
-        
+        bindToChangeButtonAction()
         configureNavigationBar()
-        
         configureBarButton()
     }
     
@@ -93,6 +89,13 @@ class AddNotesVC: UIViewController {
         }.store(in: &cancelable)
     }
     
+    func bindToChangeButtonAction(){
+        viewModel.changeStateOfButton().sink { state in
+            print(state)
+        }.store(in: &cancelable)
+    }
+    
+    
      //MARK: - Actions
     
     func configureBarButton(){
@@ -106,8 +109,9 @@ class AddNotesVC: UIViewController {
         DispatchQueue.main.async {
             self.saveButtonItem.tapPublisher.receive(on: DispatchQueue.main).sink { _ in
                 // return note
-//                self.viewModel.configureNote()
-                let note = Note(title: self.viewModel.titleNote.value, description: self.viewModel.discriptionNote.value, date: getCurrentData())
+                let note = Note(title: self.viewModel.titleNote.value,
+                                description: self.viewModel.discriptionNote.value,
+                                date: getCurrentData())
                 self.delegate.confirmAddNote(note: note)
                 self.dismiss(animated: true, completion: nil)
             }.store(in: &self.cancelable)
@@ -131,18 +135,18 @@ class AddNotesVC: UIViewController {
 extension AddNotesVC: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
-        let size = CGSize(width: view.frame.width - 20, height: .infinity)
-        let estimatedSize = discriptionTextView.sizeThatFits(size)
-        heightOfTextView.constant = estimatedSize.height
+        let size                     = CGSize(width: view.frame.width - 20, height: .infinity)
+        let estimatedSize            = discriptionTextView.sizeThatFits(size)
+        heightOfTextView.constant    = estimatedSize.height
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-//        viewModel.note
-//            .receive(on: DispatchQueue.main)
-//            .sink { note in
-//                textView.text = (textView.text == "Enter Discription" && self.title == "Add Note") ?  nil:note?.description
-//                textView.textColor = .label
-//            }.store(in: &cancelable)
+        viewModel.$note
+            .receive(on: DispatchQueue.main)
+            .sink { note in
+                textView.text = (textView.text == "Enter Discription" && self.title == "Add Note") ?  "":note?.description
+                textView.textColor = .label
+            }.store(in: &cancelable)
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {

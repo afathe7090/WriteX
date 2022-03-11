@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import Combine
+import CombineCocoa
+
 
 class NotesCell: UICollectionViewCell {
 
@@ -14,11 +17,16 @@ class NotesCell: UICollectionViewCell {
     @IBOutlet weak var backView: UIView! { didSet { backView.layer.cornerRadius = 15}}
     @IBOutlet weak var dateOfNotes: UILabel!
     @IBOutlet weak var descriptionOfNote: UILabel!
+    @IBOutlet weak var menuButtonCell: UIButton!
     @IBOutlet weak var titleOfNotes: UILabel!
+    
+    var cancelable = Set<AnyCancellable>()
+    weak var delegate: MenuButtonProtocol?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        configureMenuButtonAntion()
     }
     
     func setCell(_ note: Note){
@@ -27,5 +35,10 @@ class NotesCell: UICollectionViewCell {
         dateOfNotes.text       = note.date
     }
     
+    func configureMenuButtonAntion(){
+        menuButtonCell.tapPublisher.sink { _ in
+            self.delegate?.presentAlert()
+        }.store(in: &cancelable)
+    }
 
 }
