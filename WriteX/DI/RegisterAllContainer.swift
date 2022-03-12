@@ -10,17 +10,15 @@ import Swinject
 extension Container {
     
     public func registerAllContainer(){
+        
         loginVCDependancyInject()
-        
         registerDIContainer()
-        
         forgetDIContainer()
         
         firebaseDependencyInjectionContainer()
         
-        
+        baseTabBarContainer()
         documentDiContainer()
-        
         settingDIContainer()
         
         addNotesDIContainer()

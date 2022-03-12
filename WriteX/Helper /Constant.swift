@@ -9,5 +9,14 @@ import Foundation
 
 let defaults = UserDefaults.standard
 
-let kNOTES = "NOTESDEFAULT"
-let kCOUNTER = "COUNTER"
+let kNOTES              = "NOTESDEFAULT"
+let kCOUNTER            = "COUNTER"
+let kUID                = "UID"
+let KNOTECHILD          = "Notes"
+
+let kIDNOTE             = "id"
+let kDATE               = "date"
+let kTITLE              = "title"
+let kDISCRIPTION        = "discription"
+let kHIDDEN             = "isHidden"
+

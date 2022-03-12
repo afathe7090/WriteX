@@ -51,9 +51,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func configureAppWindow(){
         
-//        guard let rootVC = container.resolve(LoginVC.self) else { return }
-        window?.rootViewController = UINavigationController(rootViewController: BaseTabBar())
-//        UINavigationBar.appearance().isHidden = true
+        if LocalDataManager.getUser() != nil {
+            
+            // Auto Register To Home VC
+            guard let rootVC = container.resolve(BaseTabBar.self) else { return }
+            window?.rootViewController = UINavigationController(rootViewController: rootVC)
+        }else{
+            
+            // Login 
+            guard let rootVC = container.resolve(LoginVC.self) else { return }
+            window?.rootViewController = UINavigationController(rootViewController: rootVC)
+        }
+        
         window?.makeKeyAndVisible()
     }
 

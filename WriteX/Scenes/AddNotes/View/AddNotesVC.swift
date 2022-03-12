@@ -85,7 +85,7 @@ class AddNotesVC: UIViewController {
     func bindToSetFields(){
         viewModel.$note.sink { note in
             self.titleTextField.text = note?.title
-            self.discriptionTextView.text = note?.description
+            self.discriptionTextView.text = note?.discription
         }.store(in: &cancelable)
     }
     
@@ -110,7 +110,7 @@ class AddNotesVC: UIViewController {
             self.saveButtonItem.tapPublisher.receive(on: DispatchQueue.main).sink { _ in
                 // return note
                 let note = Note(title: self.viewModel.titleNote.value,
-                                description: self.viewModel.discriptionNote.value,
+                                discription: self.viewModel.discriptionNote.value,
                                 date: getCurrentData())
                 self.delegate.confirmAddNote(note: note)
                 self.dismiss(animated: true, completion: nil)
@@ -144,7 +144,7 @@ extension AddNotesVC: UITextViewDelegate {
         viewModel.$note
             .receive(on: DispatchQueue.main)
             .sink { note in
-                textView.text = (textView.text == "Enter Discription" && self.title == "Add Note") ?  "":note?.description
+                textView.text = (textView.text == "Enter Discription" && self.title == "Add Note") ?  "":note?.discription
                 textView.textColor = .label
             }.store(in: &cancelable)
     }

@@ -61,7 +61,7 @@ class DocumentViewModel {
         notesPublisher.remove(element: note)
         note.isHidden = true
         notesPublisher.insert(note, at: 0)
-        saveNotesLocaly(notesPublisher)
+        LocalDataManager.saveNotesLocaly(notesPublisher)
     }
     
     
@@ -70,13 +70,13 @@ class DocumentViewModel {
     func removeNoteSelectedBy(_ index: Int) {
         let note = searchBarActive == true ? filterPublisher[index]:notesPublisher[index]
         notesPublisher.remove(element: note)
-        saveNotesLocaly(notesPublisher)
+        LocalDataManager.saveNotesLocaly(notesPublisher)
     }
     
     
     // Save Data in defaults
     func getNotesLocalley(){
-        guard let notes = getNotesLocaly() else { return }
+        guard let notes = LocalDataManager.getNotesLocaly() else { return }
         notesPublisher = notes
     }
     
@@ -94,7 +94,23 @@ class DocumentViewModel {
     func setEdittingOrAddingNote(_ note: Note){
         if isEditting { notesPublisher.remove(element: edittingNote!)}
         notesPublisher.insert(note, at: 0)
-        saveNotesLocaly(notesPublisher)
+        LocalDataManager.saveNotesLocaly(notesPublisher)
+    }
+    
+    
+    //MARK: - Firebase Worker
+    
+    func writeNoteToFirebase(){
+        firebase.read()
+        
+        $notesPublisher.sink { notes in
+            notes.forEach { note in
+                self.firebase.write(data: noteAsDictionary(note: note),childIndex: self.notesPublisher.firstIndex(of: note)!)
+            }
+        }.store(in: &cancelable)
+
+        
+        
     }
     
 }

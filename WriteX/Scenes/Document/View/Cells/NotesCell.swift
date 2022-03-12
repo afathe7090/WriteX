@@ -31,7 +31,7 @@ class NotesCell: UICollectionViewCell {
     
     func setCell(_ note: Note){
         titleOfNotes.text      = note.title
-        descriptionOfNote.text = note.description
+        descriptionOfNote.text = note.discription
         dateOfNotes.text       = note.date
     }
     

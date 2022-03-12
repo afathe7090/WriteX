@@ -17,28 +17,6 @@ func getCurrentData()-> String{
 }
 
 
-func saveNotesLocaly(_ note: [Note]){
-    let encoder = JSONEncoder()
-    do{
-        let data = try encoder.encode(note)
-        defaults.set(data, forKey: kNOTES)
-        defaults.synchronize()
-    }catch {
-        print(error.localizedDescription)
-    }
-}
-
-func getNotesLocaly()-> [Note]? {
-    var notes: [Note]?
-    if let data = defaults.data(forKey: kNOTES) {
-        let decoder = JSONDecoder()
-        
-        do{
-            let noteDecoder = try decoder.decode([Note].self, from: data)
-            notes = noteDecoder
-        }catch{
-            print(error.localizedDescription)
-        }
-    }
-    return notes
+func noteAsDictionary(note: Note)-> NSDictionary{
+    return NSDictionary(objects: [ note.title, note.discription,note.isHidden, note.date], forKeys: [kTITLE as NSCopying, kDISCRIPTION as NSCopying, kHIDDEN as NSCopying, kDATE as NSCopying])
 }

@@ -138,7 +138,10 @@ class LoginVC: UIViewController {
             .sink { presentModel in
                 switch presentModel{
                 case .home:
-                    print("Home")
+                    guard let homeVC = container.resolve(BaseTabBar.self) else { return }
+                    let navigationHomeVC = UINavigationController(rootViewController: homeVC)
+                    navigationHomeVC.modalPresentationStyle = .fullScreen
+                    self.present(navigationHomeVC, animated: true, completion: nil)
                 }
             }.store(in: &cancelable)
     }

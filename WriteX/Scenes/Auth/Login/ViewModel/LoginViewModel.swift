@@ -43,12 +43,14 @@ class LoginViewModel {
      //MARK: - Sign in
     func signIn(){
         Task{
-            let (_, error) = await firebase.signIn(email: emailPublisher, password: passwordPublisher)
+            let (result, error) = await firebase.signIn(email: emailPublisher, password: passwordPublisher)
             if let error = error {
                 print(error)
                 await checkValidationOfEmail()
                 await checkValidationOfPassword()
             }else{ presentPublisher.send(.home) }
+            
+            if let result = result { LocalDataManager.saveUID(result.user.uid) }
         }
     }
     
