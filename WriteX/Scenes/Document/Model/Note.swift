@@ -23,6 +23,8 @@ struct Note: Codable, Equatable{
         self.isHidden = dictionary[kHIDDEN] as? Bool ?? false
     }
     
+    
+    
     init(title: String,discription: String, date : String){
         self.title = title
         self.discription = discription

@@ -101,7 +101,7 @@ class DocumentViewModel {
     //MARK: - Firebase Worker
     
     func writeNoteToFirebase(){
-        firebase.read()
+//        firebase.read()
         
         $notesPublisher.sink { notes in
             notes.forEach { note in

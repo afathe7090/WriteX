@@ -8,18 +8,23 @@
 import Combine
 import Firebase
 
+enum ERROR_READING: Error {
+    case uid_Not_Found
+}
+
 protocol FirebaseAuth {
     func signIn(withEmail: CurrentValueSubject<String,Never>
                 , password: CurrentValueSubject<String,Never>) async  -> (AuthDataResult?, Error?)
     func signUp(withEmail: CurrentValueSubject<String,Never>
                 , password: CurrentValueSubject<String,Never>) async ->(AuthDataResult? , Error?)
     func write(data: NSDictionary, childIndex: Int)
-    func read()
+    func read() async throws -> (Error? , DataSnapshot)
 }
 
 class FirebaseAuthLayer: FirebaseAuth {
     
     var ref = Database.database().reference()
+    
     
     func signIn(withEmail: CurrentValueSubject<String,Never>
                 , password: CurrentValueSubject<String,Never>) async  -> (AuthDataResult?, Error?){
@@ -52,19 +57,17 @@ class FirebaseAuthLayer: FirebaseAuth {
         
     }
     
-    func read(){
-        guard let uid = LocalDataManager.getUser() else { return }
-        self.ref.child(KNOTECHILD).child(uid).getData { error, snapshot  in
-            if let value = snapshot.value as? NSDictionary {
-                let notes: [Note] = [.init(dictionary: value as! [String : Any])]
-                print(notes)
-                
-            }else {
-                print("Error to get Data ")
+    func read() async  -> (Error? , DataSnapshot){
+        return await withCheckedContinuation({ continuation in
+            if let uid = LocalDataManager.getUser() {
+                self.ref.child(KNOTECHILD).child(uid).getData { (error, snapshot)  in
+                    continuation.resume(returning: (error, snapshot))
+                }
             }
-        }
+        })
+        
     }
-
+    
 }
 
 

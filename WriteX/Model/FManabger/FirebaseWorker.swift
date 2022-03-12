@@ -27,7 +27,16 @@ class FirebaseWorker{
         authLayer.write(data: data, childIndex: childIndex)
     }
     
-    func read(){
-        authLayer.read()
+    func read() async {
+      
+        
+        // NOTE Handel SnapShot
+        
+//        let value = snapshot.value as? NSArray
+//        for index in 0..<(value?.count ?? 1) {
+//            guard let user = value?[index] as? NSDictionary else { return }
+//            let notes = Note(dictionary: user as! [String : Any])
+//            print(notes)
+//        }
     }
 }
