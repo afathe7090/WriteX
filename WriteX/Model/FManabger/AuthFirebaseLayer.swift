@@ -46,7 +46,7 @@ class FirebaseAuthLayer: FirebaseAuth {
     
     
     func write(data: NSDictionary, childIndex: Int)  {
-        guard let uid = LocalDataManager.getUser() else { return }
+        guard let uid = LocalDataManager.getUsetOfLogin()?.curentId else { return }
         self.ref.child(KNOTECHILD).child(uid).child("\(childIndex)").setValue(data) { error, _ in
             if error != nil{
                 print(error!.localizedDescription)
@@ -59,7 +59,7 @@ class FirebaseAuthLayer: FirebaseAuth {
     
     func read() async  -> (Error? , DataSnapshot){
         return await withCheckedContinuation({ continuation in
-            if let uid = LocalDataManager.getUser() {
+            if let uid = LocalDataManager.getUsetOfLogin()?.curentId {
                 self.ref.child(KNOTECHILD).child(uid).getData { (error, snapshot)  in
                     continuation.resume(returning: (error, snapshot))
                 }

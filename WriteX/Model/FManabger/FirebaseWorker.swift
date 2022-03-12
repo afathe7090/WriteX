@@ -23,20 +23,36 @@ class FirebaseWorker{
         return await authLayer.signUp(withEmail: email, password: password)
     }
     
-    func write(data: NSDictionary,childIndex: Int) {
+    func write(data: NSDictionary,childIndex: Int?) {
+        guard let childIndex = childIndex else { return }
+
         authLayer.write(data: data, childIndex: childIndex)
     }
     
-    func read() async {
-      
+    func read() async -> [Note]?{
+        
         
         // NOTE Handel SnapShot
-        
-//        let value = snapshot.value as? NSArray
-//        for index in 0..<(value?.count ?? 1) {
-//            guard let user = value?[index] as? NSDictionary else { return }
-//            let notes = Note(dictionary: user as! [String : Any])
-//            print(notes)
-//        }
+        do{
+            let (error, snapshot)  = try await authLayer.read()
+            if error != nil { return  nil }
+            return (handelReturnNotes(snapshot: snapshot))
+        }catch{
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
+    
+    private func handelReturnNotes(snapshot: DataSnapshot)-> [Note]? {
+        var notes = [Note]()
+        let value = snapshot.value as? NSArray
+        for index in 0..<(value?.count ?? 1) {
+            let user = value?[index] as? NSDictionary
+            let note = Note(dictionary: user as! [String : Any])
+            notes.insert(note, at: index)
+            //            print(notes)
+        }
+        return notes
     }
 }

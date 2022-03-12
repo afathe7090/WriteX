@@ -9,14 +9,35 @@ import UIKit
 
 class LocalDataManager {
     
-    class func saveUID(_ uuid: String){
-        defaults.set(uuid, forKey: kUID)
-        defaults.synchronize()
+    class func saveLoginUser(user: LoginUser){
+        let encoder = JSONEncoder()
+        do{
+            let data = try encoder.encode(user)
+            defaults.set(data, forKey: kUSERDEFAULTS)
+            defaults.synchronize()
+        }catch {
+            print(error.localizedDescription)
+        }
     }
     
-    class func getUser()-> String? {
-        return defaults.string(forKey: kUID)
+    
+    
+    class func getUsetOfLogin()-> LoginUser?{
+        var userAuth: LoginUser?
+        if let data = defaults.data(forKey: kUSERDEFAULTS) {
+            let decoder = JSONDecoder()
+            
+            do{
+                let authUser = try decoder.decode(LoginUser.self, from: data)
+                userAuth = authUser
+            }catch{
+                print(error.localizedDescription)
+            }
+        }
+        return userAuth
     }
+    
+    
     
     class func saveNotesLocaly(_ note: [Note]){
         let encoder = JSONEncoder()
@@ -28,6 +49,7 @@ class LocalDataManager {
             print(error.localizedDescription)
         }
     }
+    
     
     class func getNotesLocaly()-> [Note]? {
         var notes: [Note]?

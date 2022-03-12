@@ -11,8 +11,11 @@ import Combine
 
 class SettingsViewModel{
     
+    @Published var constantCellData = ["","","",""]
     
     var firebase: FirebaseWorker!
+    
+    
     
     init(){}
     

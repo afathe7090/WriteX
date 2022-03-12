@@ -13,7 +13,7 @@ class BaseTabBar: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
-        DispatchQueue.main.async {self.viewControllers = [self.createDocumentVC() , self.createSettingVC()] }
+        viewControllers = [self.createDocumentVC() , self.createSettingVC()] 
     }
     
     override func viewWillAppear(_ animated: Bool) {

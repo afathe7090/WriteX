@@ -50,7 +50,9 @@ class LoginViewModel {
                 await checkValidationOfPassword()
             }else{ presentPublisher.send(.home) }
             
-            if let result = result { LocalDataManager.saveUID(result.user.uid) }
+            if let result = result {
+                LocalDataManager.saveLoginUser(user: LoginUser(curentId: result.user.uid, email: emailPublisher.value, password: passwordPublisher.value))
+            }
         }
     }
     

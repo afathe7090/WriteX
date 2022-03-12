@@ -34,6 +34,8 @@
 		746A02B327D3BFD70027F290 /* NotesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 746A02B127D3BFD70027F290 /* NotesCell.xib */; };
 		746A02B627D3BFF30027F290 /* AddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746A02B427D3BFF30027F290 /* AddCell.swift */; };
 		746A02B727D3BFF30027F290 /* AddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 746A02B527D3BFF30027F290 /* AddCell.xib */; };
+		7478B82F27DCC6DD006E7FAC /* UITableView + Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7478B82E27DCC6DD006E7FAC /* UITableView + Publisher.swift */; };
+		7478B83227DCC938006E7FAC /* LoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7478B83127DCC938006E7FAC /* LoginUser.swift */; };
 		7490F0B227D12DBE003AA1B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7490F0B127D12DBE003AA1B5 /* GoogleService-Info.plist */; };
 		7490F0B527D15AC0003AA1B5 /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7490F0B427D15AC0003AA1B5 /* UIButton+Ext.swift */; };
 		749D4EAC27DBE0830045A070 /* Document+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749D4EAB27DBE0830045A070 /* Document+CollectionView.swift */; };
@@ -93,6 +95,8 @@
 		746A02B127D3BFD70027F290 /* NotesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesCell.xib; sourceTree = "<group>"; };
 		746A02B427D3BFF30027F290 /* AddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCell.swift; sourceTree = "<group>"; };
 		746A02B527D3BFF30027F290 /* AddCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCell.xib; sourceTree = "<group>"; };
+		7478B82E27DCC6DD006E7FAC /* UITableView + Publisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView + Publisher.swift"; sourceTree = "<group>"; };
+		7478B83127DCC938006E7FAC /* LoginUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
 		7490F0B127D12DBE003AA1B5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7490F0B427D15AC0003AA1B5 /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
 		749D4EAB27DBE0830045A070 /* Document+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Document+CollectionView.swift"; sourceTree = "<group>"; };
@@ -169,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				7413C2D727D3CFEE000209D7 /* UICollectionView + Publisher.swift */,
+				7478B82E27DCC6DD006E7FAC /* UITableView + Publisher.swift */,
 				740119B927D0227F00D1933C /* TextField+Publisher.swift */,
 			);
 			path = Publisher;
@@ -236,6 +241,14 @@
 				746A02B127D3BFD70027F290 /* NotesCell.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		7478B83027DCC927006E7FAC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7478B83127DCC938006E7FAC /* LoginUser.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		749D4EAA27DBE0630045A070 /* DocumentVC+EXt */ = {
@@ -395,9 +408,9 @@
 		74B5519C27CEB9E600BE3335 /* WriteX */ = {
 			isa = PBXGroup;
 			children = (
-				74B271E827DC22D800C05B86 /* Model */,
 				74B551B127CEBC9A00BE3335 /* Core */,
 				7413C2DA27D3E7D8000209D7 /* Helper  */,
+				74B271E827DC22D800C05B86 /* Model */,
 				74B551CF27CEEF0700BE3335 /* Extension */,
 				7401199E27CFFF6600D1933C /* DI */,
 				74B551B527CEBD1000BE3335 /* Scenes */,
@@ -451,6 +464,7 @@
 		74B551C227CEEAD600BE3335 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				7478B83027DCC927006E7FAC /* Model */,
 				74A9332A27D2EDF5004FFDA0 /* DI */,
 				74A9332927D2EDEB004FFDA0 /* ViewModel */,
 				74A9332827D2E4FC004FFDA0 /* View */,
@@ -644,6 +658,8 @@
 				74B824FA27D268BF00B4ED82 /* SettingsVC.swift in Sources */,
 				746A02B227D3BFD70027F290 /* NotesCell.swift in Sources */,
 				74B551DE27CF023A00BE3335 /* ForgetVC.swift in Sources */,
+				7478B83227DCC938006E7FAC /* LoginUser.swift in Sources */,
+				7478B82F27DCC6DD006E7FAC /* UITableView + Publisher.swift in Sources */,
 				74B551CD27CEEBD500BE3335 /* LoginVC.swift in Sources */,
 				74B824F227D2687A00B4ED82 /* DocumentVC.swift in Sources */,
 				74C5D54227D1A681005A9550 /* PredicationManager.swift in Sources */,

@@ -51,7 +51,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func configureAppWindow(){
         
-        if LocalDataManager.getUser() != nil {
+        if LocalDataManager.getUsetOfLogin() != nil {
             
             // Auto Register To Home VC
             guard let rootVC = container.resolve(BaseTabBar.self) else { return }

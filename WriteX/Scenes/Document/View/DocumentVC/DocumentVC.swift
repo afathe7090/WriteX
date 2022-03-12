@@ -33,10 +33,12 @@ class DocumentVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Document"
+        
         viewModel.getNotesLocalley()
-        DispatchQueue.main.async {
-            self.viewModel.writeNoteToFirebase()
-        }
+        viewModel.writeNoteToFirebase()
+        
+        
+
         configureSearchController()
         configureCollectionViewCells()
         bindToSearchBarText()
