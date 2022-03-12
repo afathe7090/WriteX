@@ -67,6 +67,13 @@ class LocalDataManager {
     }
     
     
+    class func firstLoginApp(_ state: Bool = false){
+        defaults.set(state, forKey: kFIRSTLOGIN)
+        defaults.synchronize()
+    }
     
+    class func isFirstLogin()-> Bool {
+        return defaults.bool(forKey: kFIRSTLOGIN)
+    }
     
 }

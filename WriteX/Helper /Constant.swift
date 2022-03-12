@@ -21,3 +21,5 @@ let kDATE               = "date"
 let kTITLE              = "title"
 let kDISCRIPTION        = "discription"
 let kHIDDEN             = "isHidden"
+
+let kFIRSTLOGIN         = "firestLogin"

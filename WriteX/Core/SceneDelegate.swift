@@ -55,11 +55,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             // Auto Register To Home VC
             guard let rootVC = container.resolve(BaseTabBar.self) else { return }
+            LocalDataManager.firstLoginApp(false)
             window?.rootViewController = UINavigationController(rootViewController: rootVC)
         }else{
-            
-            // Login 
+            // Login
             guard let rootVC = container.resolve(LoginVC.self) else { return }
+            LocalDataManager.firstLoginApp(true)
             window?.rootViewController = UINavigationController(rootViewController: rootVC)
         }
         

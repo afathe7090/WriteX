@@ -16,7 +16,7 @@ class DocumentViewModel {
     @Published var edittingNote: Note?  = nil
     @Published var searchBarActive      = false
     let searchBarPublisher              = PassthroughSubject<String,Never>()
-    
+    let reloadCollectionView            = PassthroughSubject<Bool,Never>()
     
     private var cancelable              = Set<AnyCancellable>()
     
@@ -61,25 +61,17 @@ class DocumentViewModel {
         notesPublisher.remove(element: note)
         note.isHidden = true
         notesPublisher.insert(note, at: 0)
-//        LocalDataManager.saveNotesLocaly(notesPublisher)
     }
-    
     
     
     // Action Of Reomve Selected Button
     func removeNoteSelectedBy(_ index: Int) {
         let note = searchBarActive == true ? filterPublisher[index]:notesPublisher[index]
         notesPublisher.remove(element: note)
-//        LocalDataManager.saveNotesLocaly(notesPublisher)
     }
     
     
-    // Save Data in defaults
-    func getNotesLocalley(){
-        guard let notes = LocalDataManager.getNotesLocaly() else { return }
-        notesPublisher = notes
-    }
-    
+
     // Search View Controller Handelr Search
     func filterNotesBy(){
         Publishers.CombineLatest($notesPublisher, searchBarPublisher).map { (notes, searchText) in
@@ -94,28 +86,47 @@ class DocumentViewModel {
     func setEdittingOrAddingNote(_ note: Note){
         if isEditting { notesPublisher.remove(element: edittingNote!)}
         notesPublisher.insert(note, at: 0)
+        reloadCollectionView.send(true)
     }
     
     
     //MARK: - Firebase Worker
     
+    func setDataNotes(){
+        getNotesLocalley()
+        writeNoteToFirebase()
+        if LocalDataManager.isFirstLogin() == true { readNotes() }
+        reloadCollectionView.send(true)
+    }
+    
+    
+    // Save Data in defaults
+    func getNotesLocalley(){
+        guard let notes = LocalDataManager.getNotesLocaly() else { return }
+        notesPublisher = notes
+        reloadCollectionView.send(true)
+    }
+    
+    
+    // Save Notes in Database
     func writeNoteToFirebase(){
         $notesPublisher.sink { notes in
             LocalDataManager.saveNotesLocaly(notes)
-            notes.forEach { note in
-                
-                self.firebase.write(data: noteAsDictionary(note: note),childIndex: self.notesPublisher.firstIndex(of: note))
-            }
+            print(" In Local saved Function ")
+            notes.forEach {note in self.firebase.write(data: noteAsDictionary(note: note),
+                                    childIndex: self.notesPublisher.firstIndex(of: note)) }
         }.store(in: &cancelable)
 
-        
-        
     }
+    
+    
+    // read data from firebase
+    // Note this call in just oneA
     func readNotes(){
         Task{
             guard let notes = await firebase.read() else{ return }
             self.notesPublisher = notes
-            print(notesPublisher)
+            self.reloadCollectionView.send(true)
         }
     }
 }

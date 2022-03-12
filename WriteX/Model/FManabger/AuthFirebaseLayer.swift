@@ -68,6 +68,11 @@ class FirebaseAuthLayer: FirebaseAuth {
         
     }
     
+    
+    func signOut(){
+        // NOTE:- Don't
+        LocalDataManager.firstLoginApp(false)
+    }
 }
 
 

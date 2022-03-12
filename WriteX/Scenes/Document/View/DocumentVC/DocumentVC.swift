@@ -34,13 +34,11 @@ class DocumentVC: UIViewController {
         super.viewDidLoad()
         title = "Document"
         
-        viewModel.getNotesLocalley()
-        viewModel.writeNoteToFirebase()
+        viewModel.setDataNotes()
         
-        
-
         configureSearchController()
         configureCollectionViewCells()
+        bindToReloadCollectionView()
         bindToSearchBarText()
     }
     
@@ -76,6 +74,11 @@ class DocumentVC: UIViewController {
         }.store(in: &cancelable)
     }
     
+    func bindToReloadCollectionView(){
+        viewModel.reloadCollectionView.sink { state in
+            DispatchQueue.main.async { self.collectionView.reloadData() }
+        }.store(in: &self.cancelable)
+    }
 }
 
 
