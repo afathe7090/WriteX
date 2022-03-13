@@ -20,6 +20,7 @@ protocol FirebaseAuth {
     func write(data: NSDictionary, indexNote: Int)
     func read() async throws -> (Error? , DataSnapshot)
     func update(data: NSDictionary ,childIndex: Int)
+    func deleteAll()
     func delete(index: Int)
 }
 
@@ -58,6 +59,12 @@ class FirebaseAuthLayer: FirebaseAuth {
         }
         
     }
+    
+    func deleteAll(){
+        guard let uid = LocalDataManager.getUsetOfLogin()?.curentId else { return }
+        self.ref.child(KNOTECHILD).child(uid).removeValue()
+    }
+    
     
     func delete(index: Int){
         guard let uid = LocalDataManager.getUsetOfLogin()?.curentId else { return }

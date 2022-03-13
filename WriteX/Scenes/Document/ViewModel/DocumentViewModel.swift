@@ -15,6 +15,9 @@ class DocumentViewModel {
     @Published var filterPublisher      = [Note]()
     @Published var edittingNote: Note?  = nil
     @Published var searchBarActive      = false
+    @Published var isHiddenNotes        = true
+    
+    
     let searchBarPublisher              = PassthroughSubject<String,Never>()
     let reloadCollectionView            = PassthroughSubject<Bool,Never>()
     
@@ -35,7 +38,7 @@ class DocumentViewModel {
     
     // nUmber of Rows after Filter
     func numberOfRows()-> Int{
-        return searchBarActive == false ? notesPublisher.filter({$0.isHidden == false}).count + 1:filterPublisher.filter({$0.isHidden == false}).count
+        return searchBarActive == false ? notesPublisher.filter({$0.isHidden == isHiddenNotes}).count + 1:filterPublisher.filter({$0.isHidden == isHiddenNotes}).count
     }
     
     // Setup Notes Cells
@@ -43,7 +46,6 @@ class DocumentViewModel {
         let note = searchBarActive == true ? filterPublisher[index]:notesPublisher[index - 1]
         cell.menuButtonCell.tag = searchBarActive == true ? index:index - 1
         cell.setCell(note)
-        
     }
     
     // Note that will be editting
@@ -57,11 +59,15 @@ class DocumentViewModel {
     
     //hiden Notes That Selected
     func hidenNoteSelectedBy(_ index: Int){
-        var note = searchBarActive == true ? filterPublisher[index]:notesPublisher[index]
+        let note = searchBarActive == true ? filterPublisher[index]:notesPublisher[index]
         notesPublisher.remove(element: note)
-        note.isHidden = true
-        notesPublisher.insert(note, at: 0)
-        updateNotesFirebase(note: note , index: 0)
+
+        let noteHidden = Note(title: note.title, discription: note.discription, date: note.date, isHidden: true)
+        notesPublisher.append(noteHidden)
+        
+        firebase.deleteAll()
+        writeNotesToFirebase()
+        reloadCollectionView.send(true)
     }
     
     
@@ -69,7 +75,7 @@ class DocumentViewModel {
     func removeNoteSelectedBy(_ index: Int) {
         let note = searchBarActive == true ? filterPublisher[index]:notesPublisher[index]
         notesPublisher.remove(element: note)
-        delete(index: index)
+        firebase.deleteAll()
         writeNotesToFirebase()
     }
     
@@ -121,7 +127,8 @@ class DocumentViewModel {
     }
     
     func writeNotesToFirebase(){
-        notesPublisher.forEach { note in
+        guard let notesDataLocaly = LocalDataManager.getNotesLocaly() else { return }
+        notesDataLocaly.forEach { note in
             firebase.write(data: noteAsDictionary(note: note),indexNote: notesPublisher.firstIndex(of: note) ?? 0)
         }
     }

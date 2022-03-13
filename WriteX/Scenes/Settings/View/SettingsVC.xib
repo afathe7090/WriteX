@@ -28,7 +28,7 @@
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="YM7-P5-9qJ">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" name="backgroundColor"/>
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
@@ -69,6 +69,7 @@
                     <constraint firstItem="ZT5-fo-j2v" firstAttribute="centerY" secondItem="u8E-KJ-LZU" secondAttribute="centerY" id="rwN-DU-g00"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" name="textFieldBackground"/>
             <point key="canvasLocation" x="783" y="-135"/>
         </tableViewCell>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" id="fr1-96-Nds">
@@ -91,6 +92,7 @@
                     <constraint firstItem="t0F-oI-n8g" firstAttribute="centerY" secondItem="674-hE-gwd" secondAttribute="centerY" id="tYQ-BY-cbS"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" name="textFieldBackground"/>
             <point key="canvasLocation" x="783" y="-79"/>
         </tableViewCell>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Zn2-OO-VLx">
@@ -118,6 +120,7 @@
                     <constraint firstItem="Vy2-al-1xK" firstAttribute="leading" secondItem="bAQ-6e-ZqW" secondAttribute="leading" constant="10" id="ywq-u9-rjf"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" name="textFieldBackground"/>
             <point key="canvasLocation" x="783" y="-19"/>
         </tableViewCell>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Mbn-xd-3Fl">
@@ -140,6 +143,7 @@
                     <constraint firstItem="ww3-hW-G67" firstAttribute="centerX" secondItem="lDS-R5-XrR" secondAttribute="centerX" id="Eh9-VA-KaA"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" name="textFieldBackground"/>
             <point key="canvasLocation" x="783" y="42"/>
         </tableViewCell>
     </objects>
@@ -153,9 +157,6 @@
         <namedColor name="textFieldBackground">
             <color red="0.99599999189376831" green="0.99599999189376831" blue="0.99599999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -13,6 +13,7 @@ class AddNotesViewModel {
     
     @Published var stateOfView: StateOfAddNote = .add
     @Published var note: Note!
+    @Published var isHiddenNote = false
     
     let titleNote = CurrentValueSubject<String,Never>("")
     let discriptionNote = CurrentValueSubject<String,Never>("")

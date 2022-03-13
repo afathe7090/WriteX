@@ -13,7 +13,7 @@ struct Note: Codable, Equatable{
     let title       : String
     let discription : String
     let date        : String
-    var isHidden    = false
+    var isHidden    : Bool
     
     
     init(dictionary: [String: Any]){
@@ -25,10 +25,10 @@ struct Note: Codable, Equatable{
     
     
     
-    init(title: String,discription: String, date : String){
+    init(title: String,discription: String, date : String, isHidden: Bool = false){
         self.title = title
         self.discription = discription
         self.date = date
-        
+        self.isHidden = isHidden
     }
 }

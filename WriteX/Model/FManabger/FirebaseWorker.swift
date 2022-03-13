@@ -50,7 +50,9 @@ class FirebaseWorker{
         authLayer.delete(index: index)
     }
     
-    
+    func deleteAll(){
+        authLayer.deleteAll()
+    }
     
     
     private func handelReturnNotes(snapshot: DataSnapshot)-> [Note]? {

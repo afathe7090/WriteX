@@ -33,7 +33,10 @@ class SettingsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Setting"
+        
+        viewModel.configureLoginUser()
         configureTableViewCellBinding()
+        bindToEmailConfiguretion()
     }
     
     func configureTableViewCellBinding(){
@@ -46,5 +49,20 @@ class SettingsVC: UIViewController {
         })).store(in: &cancelabel)
     }
     
+    
+    func bindToEmailConfiguretion(){
+        viewModel.$userAuth.sink { user in
+            self.emailOfUserLabel.text = user?.email
+        }.store(in: &cancelabel)
+    }
 
+    func bindToSelectItemsOfTableVIew(){
+        tableView.didSelectRowPublisher.sink { index in
+            if index.row == 1 {
+                //Go TO Hidden Document
+            }
+        }.store(in: &cancelabel)
+    }
+    
+    
 }

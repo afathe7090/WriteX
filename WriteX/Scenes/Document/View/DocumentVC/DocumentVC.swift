@@ -34,13 +34,14 @@ class DocumentVC: UIViewController {
         super.viewDidLoad()
         title = "Document"
         
-//        viewModel.delete()
+       
         viewModel.setDataNotes()
         
         configureSearchController()
         configureCollectionViewCells()
         bindToReloadCollectionView()
         bindToSearchBarText()
+        print( viewModel.numberOfRows())
     }
     
     override func viewWillDisappear(_ animated: Bool) {

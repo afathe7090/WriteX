@@ -17,6 +17,8 @@ enum StateOfAddNote{
 protocol ConfirmEditNote: AnyObject {
     // Note That Done
     func configureNote (_ note: Note)
+    
+    func isHiddenNotes(_ state: Bool)
 }
 
 
@@ -49,7 +51,7 @@ class AddNotesVC: UIViewController {
     }
     
     
-     //MARK: - Confirm UI
+    //MARK: - Confirm UI
     func configureNavigationBar(){
         navigationItem.rightBarButtonItem = saveButtonItem
         navigationItem.leftBarButtonItem  = cancelButtonItem
@@ -63,7 +65,7 @@ class AddNotesVC: UIViewController {
         textViewDidBeginEditing(discriptionTextView)
         textViewDidEndEditing(discriptionTextView)
     }
-     //MARK: - Binding
+    //MARK: - Binding
     
     
     func bindFieldsToViewModel(){
@@ -96,7 +98,7 @@ class AddNotesVC: UIViewController {
     }
     
     
-     //MARK: - Actions
+    //MARK: - Actions
     
     func configureBarButton(){
         Task{
@@ -111,7 +113,7 @@ class AddNotesVC: UIViewController {
                 // return note
                 let note = Note(title: self.viewModel.titleNote.value,
                                 discription: self.viewModel.discriptionNote.value,
-                                date: getCurrentData())
+                                date: getCurrentData(), isHidden: self.viewModel.isHiddenNote)
                 self.delegate.confirmAddNote(note: note)
                 self.dismiss(animated: true, completion: nil)
             }.store(in: &self.cancelable)
@@ -126,12 +128,12 @@ class AddNotesVC: UIViewController {
         }
     }
     
-
+    
     
     
 }
 
- //MARK: - Confirm TextView
+//MARK: - Confirm TextView
 extension AddNotesVC: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
@@ -161,5 +163,8 @@ extension AddNotesVC: ConfirmEditNote {
     func configureNote(_ note: Note) {
         viewModel.stateOfView = .edit
         viewModel.note = note
+    }
+    func isHiddenNotes(_ state: Bool) {
+        self.viewModel.isHiddenNote  = state
     }
 }
