@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 protocol ConfirmAddNote: AnyObject {
     func confirmAddNote(note: Note)
@@ -22,6 +23,10 @@ extension DocumentVC: ConfirmAddNote {
     }
 }
 
+protocol HiddenViewProtocol: AnyObject {
+    func configureHiddenType()
+}
+
 
 // setUp Menu Button 
 extension DocumentVC: MenuButtonProtocol{
@@ -31,19 +36,14 @@ extension DocumentVC: MenuButtonProtocol{
         
         let optionMenue = UIAlertController(title: "FB", message: "Please Select an Option ", preferredStyle: .actionSheet)
         
-        let hideAction = UIAlertAction(title: "Hide", style: .default) { alert in
-            // get note that selected
-            // filter notes
-            // save data locally
-            // reload data
+        let hideAction = UIAlertAction(title: viewModel.isHiddenNotes == true ? "Show":"Hide", style: .default) { alert in
+
             self.viewModel.hidenNoteSelectedBy(index)
             self.collectionView.reloadData()
         }
         
         let reomveNote = UIAlertAction(title: "Remove", style: .destructive) { alert in
-            // get not that we need to remove it
-            // save data locally
-            // reload data
+          
             self.viewModel.removeNoteSelectedBy(index)
             self.collectionView.reloadData()
         }
@@ -57,5 +57,16 @@ extension DocumentVC: MenuButtonProtocol{
         
         present(optionMenue, animated: true, completion: nil)
     }
+    
+}
+
+extension DocumentVC: HiddenViewProtocol {
+    func configureHiddenType() {
+        viewModel.isHiddenNotes = true
+        
+        print(viewModel.isHiddenNotes)
+        print(viewModel.notesPublisher)
+    }
+    
     
 }

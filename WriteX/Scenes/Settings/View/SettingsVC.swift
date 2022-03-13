@@ -11,7 +11,7 @@ import CombineCocoa
 
 class SettingsVC: UIViewController {
 
-    
+    weak var delegate: HiddenViewProtocol!
     var viewModel: SettingsViewModel!
     var cancelabel = Set<AnyCancellable>()
     
@@ -33,10 +33,10 @@ class SettingsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Setting"
-        
         viewModel.configureLoginUser()
         configureTableViewCellBinding()
         bindToEmailConfiguretion()
+        bindToSelectItemsOfTableVIew()
     }
     
     func configureTableViewCellBinding(){
@@ -60,6 +60,15 @@ class SettingsVC: UIViewController {
         tableView.didSelectRowPublisher.sink { index in
             if index.row == 1 {
                 //Go TO Hidden Document
+                guard let documentVC = container.resolve(DocumentVC.self) else { return }
+                self.delegate = documentVC
+                self.delegate.configureHiddenType()
+                self.navigationController?.pushViewController(documentVC, animated: true)
+//                let navigationDocument = UINavigationController(rootViewController: documentVC)
+//                self.present(navigationDocument, animated: true, completion: nil)
+            }else if index.row == 3{
+                // Log oUt
+                // Note Don't make data defaults = nil
             }
         }.store(in: &cancelabel)
     }

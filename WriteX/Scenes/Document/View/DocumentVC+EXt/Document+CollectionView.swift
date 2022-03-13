@@ -51,7 +51,7 @@ extension DocumentVC: UICollectionViewDataSource, UICollectionViewDelegate {
             viewModel.isEditting = false
         }else{
             delegate?.configureNote(viewModel.presentedNote(index: indexPath.row))
-            delegate.isHiddenNotes(viewModel.isHiddenNotes)
+            delegate?.isHiddenNotes(viewModel.isHiddenNotes)
         }
         present(navigationVC, animated: true)
     }

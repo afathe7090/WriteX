@@ -33,7 +33,6 @@ class DocumentVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Document"
-        
        
         viewModel.setDataNotes()
         
@@ -49,6 +48,17 @@ class DocumentVC: UIViewController {
         searchController.isActive = false
         collectionView.reloadData()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.reloadData()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        collectionView.reloadData()
+    }
+    
     
     //----------------------------------------------------------------------------------------------------------------
     //=======>MARK: -  Helper Functions
@@ -75,6 +85,8 @@ class DocumentVC: UIViewController {
             self.viewModel.searchBarPublisher.send(str)
         }.store(in: &cancelable)
     }
+    
+    
     
     func bindToReloadCollectionView(){
         viewModel.reloadCollectionView.sink { state in

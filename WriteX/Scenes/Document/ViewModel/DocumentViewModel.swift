@@ -15,7 +15,7 @@ class DocumentViewModel {
     @Published var filterPublisher      = [Note]()
     @Published var edittingNote: Note?  = nil
     @Published var searchBarActive      = false
-    @Published var isHiddenNotes        = true
+    @Published var isHiddenNotes        = false
     
     
     let searchBarPublisher              = PassthroughSubject<String,Never>()
@@ -62,11 +62,13 @@ class DocumentViewModel {
         let note = searchBarActive == true ? filterPublisher[index]:notesPublisher[index]
         notesPublisher.remove(element: note)
 
-        let noteHidden = Note(title: note.title, discription: note.discription, date: note.date, isHidden: true)
-        notesPublisher.append(noteHidden)
+        notesPublisher.insert(note, at: 0)
         
         firebase.deleteAll()
         writeNotesToFirebase()
+        
+        
+        LocalDataManager.saveNotesLocaly(notesPublisher)
         reloadCollectionView.send(true)
     }
     
@@ -77,6 +79,8 @@ class DocumentViewModel {
         notesPublisher.remove(element: note)
         firebase.deleteAll()
         writeNotesToFirebase()
+        
+        LocalDataManager.saveNotesLocaly(notesPublisher)
     }
     
     
@@ -97,6 +101,8 @@ class DocumentViewModel {
         notesPublisher.insert(note, at: 0)
         reloadCollectionView.send(true)
         writeNotesToFirebase()
+        
+        LocalDataManager.saveNotesLocaly(notesPublisher)
     }
     
     
@@ -104,7 +110,7 @@ class DocumentViewModel {
     
     func setDataNotes(){
         getNotesLocalley()
-        writeNoteToFirebase()
+//        writeNoteToFirebase()
         if LocalDataManager.isFirstLogin() == true { readNotes() }
         reloadCollectionView.send(true)
     }
@@ -119,12 +125,12 @@ class DocumentViewModel {
     
   
     
-    // Save Notes in Database
-    func writeNoteToFirebase(){
-        $notesPublisher.sink { notes in
-            LocalDataManager.saveNotesLocaly(notes)
-        }.store(in: &cancelable)
-    }
+//    // Save Notes in Database
+//    func writeNoteToFirebase(){
+//        $notesPublisher.sink { notes in
+//            LocalDataManager.saveNotesLocaly(notes)
+//        }.store(in: &cancelable)
+//    }
     
     func writeNotesToFirebase(){
         guard let notesDataLocaly = LocalDataManager.getNotesLocaly() else { return }
