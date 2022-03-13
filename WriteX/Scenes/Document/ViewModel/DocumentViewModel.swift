@@ -61,6 +61,7 @@ class DocumentViewModel {
         notesPublisher.remove(element: note)
         note.isHidden = true
         notesPublisher.insert(note, at: 0)
+        updateNotesFirebase(note: note , index: 0)
     }
     
     
@@ -68,10 +69,12 @@ class DocumentViewModel {
     func removeNoteSelectedBy(_ index: Int) {
         let note = searchBarActive == true ? filterPublisher[index]:notesPublisher[index]
         notesPublisher.remove(element: note)
+        delete(index: index)
+        writeNotesToFirebase()
     }
     
     
-
+    
     // Search View Controller Handelr Search
     func filterNotesBy(){
         Publishers.CombineLatest($notesPublisher, searchBarPublisher).map { (notes, searchText) in
@@ -87,6 +90,7 @@ class DocumentViewModel {
         if isEditting { notesPublisher.remove(element: edittingNote!)}
         notesPublisher.insert(note, at: 0)
         reloadCollectionView.send(true)
+        writeNotesToFirebase()
     }
     
     
@@ -107,25 +111,30 @@ class DocumentViewModel {
         reloadCollectionView.send(true)
     }
     
-    func delete(){
-        firebase.delete()
-    }
+  
     
     // Save Notes in Database
     func writeNoteToFirebase(){
         $notesPublisher.sink { notes in
             LocalDataManager.saveNotesLocaly(notes)
-//            notes.forEach {note in self.firebase.write(data: noteAsDictionary(note: note),
-//                                    childIndex: self.notesPublisher.firstIndex(of: note)) }
-            
-            
-            
-            //NOTE:- BUG When update 
-//            notes.forEach { note in
-//                self.firebase.update(data: noteAsDictionary(note: note),childIndex: self.notesPublisher.firstIndex(of: note)!)
-//            }
         }.store(in: &cancelable)
     }
+    
+    func writeNotesToFirebase(){
+        notesPublisher.forEach { note in
+            firebase.write(data: noteAsDictionary(note: note),indexNote: notesPublisher.firstIndex(of: note) ?? 0)
+        }
+    }
+    
+    func updateNotesFirebase(note: Note , index: Int){
+        firebase.update(data: noteAsDictionary(note: note),childIndex: index)
+    }
+    
+    func delete(index: Int){
+        firebase.delete(index: index)
+    }
+    
+    
     
     
     // read data from firebase
@@ -137,5 +146,5 @@ class DocumentViewModel {
             self.reloadCollectionView.send(true)
         }
     }
+    
 }
-

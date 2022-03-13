@@ -17,10 +17,10 @@ protocol FirebaseAuth {
                 , password: CurrentValueSubject<String,Never>) async  -> (AuthDataResult?, Error?)
     func signUp(withEmail: CurrentValueSubject<String,Never>
                 , password: CurrentValueSubject<String,Never>) async ->(AuthDataResult? , Error?)
-    func write(data: NSDictionary, childIndex: Int)
+    func write(data: NSDictionary, indexNote: Int)
     func read() async throws -> (Error? , DataSnapshot)
     func update(data: NSDictionary ,childIndex: Int)
-    func delete()
+    func delete(index: Int)
 }
 
 class FirebaseAuthLayer: FirebaseAuth {
@@ -47,9 +47,9 @@ class FirebaseAuthLayer: FirebaseAuth {
     }
     
     
-    func write(data: NSDictionary, childIndex: Int)  {
+    func write(data: NSDictionary, indexNote: Int)  {
         guard let uid = LocalDataManager.getUsetOfLogin()?.curentId else { return }
-        self.ref.child(KNOTECHILD).child(uid).child("\(childIndex)").setValue(data) { error, _ in
+        ref.child(KNOTECHILD).child(uid).child("\(indexNote)").setValue(data) { error, _ in
             if error != nil{
                 print(error!.localizedDescription)
                 return
@@ -59,9 +59,9 @@ class FirebaseAuthLayer: FirebaseAuth {
         
     }
     
-    func delete(){
+    func delete(index: Int){
         guard let uid = LocalDataManager.getUsetOfLogin()?.curentId else { return }
-        self.ref.child(KNOTECHILD).child(uid).removeValue()
+        self.ref.child(KNOTECHILD).child(uid).child("\(index)").removeValue()
     }
     
     

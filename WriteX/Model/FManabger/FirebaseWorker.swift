@@ -23,9 +23,8 @@ class FirebaseWorker{
         return await authLayer.signUp(withEmail: email, password: password)
     }
     
-    func write(data: NSDictionary,childIndex: Int?) {
-        guard let childIndex = childIndex else { return }
-        authLayer.write(data: data, childIndex: childIndex)
+    func write(data: NSDictionary, indexNote: Int) {
+        authLayer.write(data: data, indexNote: indexNote )
     }
     
     func update(data: NSDictionary,childIndex: Int){
@@ -47,8 +46,8 @@ class FirebaseWorker{
     
     
     
-    func delete(){
-        authLayer.delete()
+    func delete(index: Int){
+        authLayer.delete(index: index)
     }
     
     
@@ -56,12 +55,11 @@ class FirebaseWorker{
     
     private func handelReturnNotes(snapshot: DataSnapshot)-> [Note]? {
         var notes = [Note]()
-        let value = snapshot.value as? NSArray
-        for index in 0..<(value?.count ?? 1) {
-            let user = value?[index] as? NSDictionary
+        guard let value = snapshot.value as? NSArray else { return nil}
+        for index in 0..<(value.count ) {
+            let user = value[index] as? NSDictionary
             let note = Note(dictionary: user as! [String : Any])
             notes.insert(note, at: index)
-            //            print(notes)
         }
         return notes
     }
