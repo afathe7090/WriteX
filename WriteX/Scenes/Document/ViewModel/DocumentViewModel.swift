@@ -107,16 +107,24 @@ class DocumentViewModel {
         reloadCollectionView.send(true)
     }
     
+    func delete(){
+        firebase.delete()
+    }
     
     // Save Notes in Database
     func writeNoteToFirebase(){
         $notesPublisher.sink { notes in
             LocalDataManager.saveNotesLocaly(notes)
-            print(" In Local saved Function ")
-            notes.forEach {note in self.firebase.write(data: noteAsDictionary(note: note),
-                                    childIndex: self.notesPublisher.firstIndex(of: note)) }
+//            notes.forEach {note in self.firebase.write(data: noteAsDictionary(note: note),
+//                                    childIndex: self.notesPublisher.firstIndex(of: note)) }
+            
+            
+            
+            //NOTE:- BUG When update 
+//            notes.forEach { note in
+//                self.firebase.update(data: noteAsDictionary(note: note),childIndex: self.notesPublisher.firstIndex(of: note)!)
+//            }
         }.store(in: &cancelable)
-
     }
     
     

@@ -19,7 +19,6 @@ protocol MenuButtonProtocol: AnyObject {
 extension DocumentVC: ConfirmAddNote {
     func confirmAddNote(note: Note) {
         viewModel.setEdittingOrAddingNote(note)
-        collectionView.reloadData()
     }
 }
 

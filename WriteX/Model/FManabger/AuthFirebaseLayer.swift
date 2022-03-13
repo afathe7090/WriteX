@@ -19,6 +19,8 @@ protocol FirebaseAuth {
                 , password: CurrentValueSubject<String,Never>) async ->(AuthDataResult? , Error?)
     func write(data: NSDictionary, childIndex: Int)
     func read() async throws -> (Error? , DataSnapshot)
+    func update(data: NSDictionary ,childIndex: Int)
+    func delete()
 }
 
 class FirebaseAuthLayer: FirebaseAuth {
@@ -55,6 +57,18 @@ class FirebaseAuthLayer: FirebaseAuth {
             
         }
         
+    }
+    
+    func delete(){
+        guard let uid = LocalDataManager.getUsetOfLogin()?.curentId else { return }
+        self.ref.child(KNOTECHILD).child(uid).removeValue()
+    }
+    
+    
+    
+    func update(data: NSDictionary ,childIndex: Int){
+        guard let uid = LocalDataManager.getUsetOfLogin()?.curentId else { return }
+        self.ref.child(KNOTECHILD).child(uid).child("\(childIndex)").updateChildValues(data as! [AnyHashable : Any])
     }
     
     func read() async  -> (Error? , DataSnapshot){

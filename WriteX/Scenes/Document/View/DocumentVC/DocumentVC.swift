@@ -34,6 +34,7 @@ class DocumentVC: UIViewController {
         super.viewDidLoad()
         title = "Document"
         
+//        viewModel.delete()
         viewModel.setDataNotes()
         
         configureSearchController()

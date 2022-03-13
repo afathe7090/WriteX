@@ -25,13 +25,15 @@ class FirebaseWorker{
     
     func write(data: NSDictionary,childIndex: Int?) {
         guard let childIndex = childIndex else { return }
-
         authLayer.write(data: data, childIndex: childIndex)
     }
     
+    func update(data: NSDictionary,childIndex: Int){
+        authLayer.update(data: data ,childIndex: childIndex)
+    }
+    
+    
     func read() async -> [Note]?{
-        
-        
         // NOTE Handel SnapShot
         do{
             let (error, snapshot)  = try await authLayer.read()
@@ -42,6 +44,14 @@ class FirebaseWorker{
             return nil
         }
     }
+    
+    
+    
+    func delete(){
+        authLayer.delete()
+    }
+    
+    
     
     
     private func handelReturnNotes(snapshot: DataSnapshot)-> [Note]? {
