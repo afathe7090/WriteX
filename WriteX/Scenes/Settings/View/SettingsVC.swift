@@ -10,12 +10,12 @@ import Combine
 import CombineCocoa
 
 class SettingsVC: UIViewController {
-
+    
     weak var delegate: HiddenViewProtocol!
     var viewModel: SettingsViewModel!
     var cancelabel = Set<AnyCancellable>()
     
-     //MARK: - Outlet
+    //MARK: - Outlet
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var hidenNotesCell: UITableViewCell!
@@ -29,7 +29,7 @@ class SettingsVC: UIViewController {
     
     
     
-     //MARK: - Life Cycle
+    //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Setting"
@@ -57,7 +57,7 @@ class SettingsVC: UIViewController {
             self.emailOfUserLabel.text = user?.email
         }.store(in: &cancelabel)
     }
-
+    
     func bindToSelectItemsOfTableVIew(){
         tableView.didSelectRowPublisher.sink { index in
             if index.row == 1 {
@@ -66,8 +66,8 @@ class SettingsVC: UIViewController {
                 self.delegate = documentVC
                 self.delegate.configureHiddenType()
                 self.navigationController?.pushViewController(documentVC, animated: true)
-//                let navigationDocument = UINavigationController(rootViewController: documentVC)
-//                self.present(navigationDocument, animated: true, completion: nil)
+                //                let navigationDocument = UINavigationController(rootViewController: documentVC)
+                //                self.present(navigationDocument, animated: true, completion: nil)
             }else if index.row == 3{
                 self.handelAllDataToBeNUll()
                 guard let rootVC = container.resolve(LoginVC.self) else { return }
@@ -80,22 +80,20 @@ class SettingsVC: UIViewController {
     
     func handelSwitchState(){
         let stateOfMode = LocalDataManager.themeOfInterface()
-        DispatchQueue.main.async {
-            self.switchDarkMode.isOn = stateOfMode.uiInterfaceStyle == .dark
-        }
+        self.switchDarkMode.isOn = stateOfMode.uiInterfaceStyle == .dark
     }
     
     func handelActionOfSwith(){
-
         switchDarkMode.addTarget(self, action: #selector(handelSwitshOfAction), for: .allEvents)
     }
     
     
     @objc
     func handelSwitshOfAction(){
-        
-        LocalDataManager.configureSystemStyle(theme: switchDarkMode.isOn == true ? .dark:.light)
-        AppDelegate().overrideApplicationThemeStyle()
+        DispatchQueue.main.async {
+            LocalDataManager.configureSystemStyle(theme: self.switchDarkMode.isOn == true ? .dark:.light)
+            AppDelegate().overrideApplicationThemeStyle()
+        }
     }
     
     func handelAllDataToBeNUll(){

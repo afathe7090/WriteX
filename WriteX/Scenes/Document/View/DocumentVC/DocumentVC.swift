@@ -38,7 +38,6 @@ class DocumentVC: UIViewController {
        
         viewModel.setDataNotes()
         
-        
         configureSearchController()
         configureCollectionViewCells()
         
@@ -46,7 +45,7 @@ class DocumentVC: UIViewController {
         bindToReloadCollectionView()
         bindToSearchBarText()
 
-        
+        print(viewModel.notesPublisher)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -112,7 +112,8 @@ class DocumentViewModel {
     
     func setDataNotes(){
         getNotesLocalley()
-        if LocalDataManager.isFirstLogin() == true { readNotes() }
+        if LocalDataManager.isFirstLogin() == true || notesPublisher == []{ readNotes() }
+        localDataManagerWithWriteToFirebaseToUpdateIndexs()
         reloadCollectionView.send(true)
     }
     
@@ -147,6 +148,7 @@ class DocumentViewModel {
         Task{
             guard let notes = await firebase.read() else{ return }
             self.notesPublisher = notes
+            localDataManagerWithWriteToFirebaseToUpdateIndexs()
             self.reloadCollectionView.send(true)
         }
     }
