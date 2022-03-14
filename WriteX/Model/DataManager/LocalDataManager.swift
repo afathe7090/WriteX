@@ -9,6 +9,11 @@ import UIKit
 
 class LocalDataManager {
     
+    
+    //----------------------------------------------------------------------------------------------------------------
+    //=======>MARK: -  save user of data when login
+    // WE Will need it to present email as String and password to valid hiden Notes
+    //----------------------------------------------------------------------------------------------------------------
     class func saveLoginUser(user: LoginUser?){
         let encoder = JSONEncoder()
         do{
@@ -19,9 +24,7 @@ class LocalDataManager {
             print(error.localizedDescription)
         }
     }
-    
-    
-    
+        
     class func getUsetOfLogin()-> LoginUser?{
         var userAuth: LoginUser?
         if let data = defaults.data(forKey: kUSERDEFAULTS) {
@@ -38,7 +41,9 @@ class LocalDataManager {
     }
     
     
-    
+    //----------------------------------------------------------------------------------------------------------------
+    //=======>MARK: -  Save and work with the Locally of Notes
+    //----------------------------------------------------------------------------------------------------------------
     class func saveNotesLocaly(_ note: [Note]?){
         let encoder = JSONEncoder()
         do{
@@ -67,6 +72,9 @@ class LocalDataManager {
     }
     
     
+    //----------------------------------------------------------------------------------------------------------------
+    //=======>MARK: -  Handel is First Login to read all data for user from firebase
+    //----------------------------------------------------------------------------------------------------------------
     class func firstLoginApp(_ state: Bool = false){
         defaults.set(state, forKey: kFIRSTLOGIN)
         defaults.synchronize()
@@ -76,13 +84,19 @@ class LocalDataManager {
         return defaults.bool(forKey: kFIRSTLOGIN)
     }
     
-    class func configureSystemStyle(theme: Theme = .system) {
-        defaults.set(theme, forKey: kDARKMODE)
+    
+    //----------------------------------------------------------------------------------------------------------------
+    //=======>MARK: -  Handel DarkMode
+    //----------------------------------------------------------------------------------------------------------------
+    class func configureSystemStyle(theme: Theme) {
+        defaults.set(theme.rawValue, forKey: kDARKMODE)
         defaults.synchronize()
     }
     
     class func themeOfInterface()-> Theme {
-        return defaults.value(forKey: kDARKMODE) as! Theme
+        guard let rowValue = defaults.string(forKey: kDARKMODE) else { return .light }
+        guard let theme = Theme(rawValue: rowValue) else { fatalError() }
+        return theme
     }
     
 }

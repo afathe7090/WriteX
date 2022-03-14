@@ -37,6 +37,8 @@ class SettingsVC: UIViewController {
         configureTableViewCellBinding()
         bindToEmailConfiguretion()
         bindToSelectItemsOfTableVIew()
+        handelSwitchState()
+        handelActionOfSwith()
     }
     
     func configureTableViewCellBinding(){
@@ -74,6 +76,26 @@ class SettingsVC: UIViewController {
                 self.present(rootVC, animated: true, completion: nil)
             }
         }.store(in: &cancelabel)
+    }
+    
+    func handelSwitchState(){
+        let stateOfMode = LocalDataManager.themeOfInterface()
+        DispatchQueue.main.async {
+            self.switchDarkMode.isOn = stateOfMode.uiInterfaceStyle == .dark
+        }
+    }
+    
+    func handelActionOfSwith(){
+
+        switchDarkMode.addTarget(self, action: #selector(handelSwitshOfAction), for: .allEvents)
+    }
+    
+    
+    @objc
+    func handelSwitshOfAction(){
+        
+        LocalDataManager.configureSystemStyle(theme: switchDarkMode.isOn == true ? .dark:.light)
+        AppDelegate().overrideApplicationThemeStyle()
     }
     
     func handelAllDataToBeNUll(){
