@@ -68,7 +68,10 @@ class SettingsVC: UIViewController {
 //                self.present(navigationDocument, animated: true, completion: nil)
             }else if index.row == 3{
                 self.handelAllDataToBeNUll()
-                
+                guard let rootVC = container.resolve(LoginVC.self) else { return }
+                rootVC.modalPresentationStyle = .fullScreen
+                rootVC.modalTransitionStyle = .flipHorizontal
+                self.present(rootVC, animated: true, completion: nil)
             }
         }.store(in: &cancelabel)
     }

@@ -33,12 +33,19 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.isHidden = true
         configureBinding()
         configureActions()
         configureRegisterButtonAttr()
         
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+        
+    }
     
     //----------------------------------------------------------------------------------------------------------------
     //=======>MARK: -  Helper Functions
