@@ -76,4 +76,13 @@ class LocalDataManager {
         return defaults.bool(forKey: kFIRSTLOGIN)
     }
     
+    class func configureSystemStyle(theme: Theme = .system) {
+        defaults.set(theme, forKey: kDARKMODE)
+        defaults.synchronize()
+    }
+    
+    class func themeOfInterface()-> Theme {
+        return defaults.value(forKey: kDARKMODE) as! Theme
+    }
+    
 }

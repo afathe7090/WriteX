@@ -23,3 +23,4 @@ let kDISCRIPTION        = "discription"
 let kHIDDEN             = "isHidden"
 
 let kFIRSTLOGIN         = "firestLogin"
+let kDARKMODE           = "kDARKMODE"

@@ -41,6 +41,7 @@
 		749D4EAC27DBE0830045A070 /* Document+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749D4EAB27DBE0830045A070 /* Document+CollectionView.swift */; };
 		749D4EAE27DBE0C30045A070 /* Document+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749D4EAD27DBE0C30045A070 /* Document+Protocols.swift */; };
 		749D4EB027DBE0F30045A070 /* Document+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749D4EAF27DBE0F30045A070 /* Document+Search.swift */; };
+		74AD7CC427DFC84F00775C3B /* DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AD7CC327DFC84F00775C3B /* DarkMode.swift */; };
 		74B271EB27DC232500C05B86 /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B271EA27DC232500C05B86 /* LocalDataManager.swift */; };
 		74B271ED27DC259D00C05B86 /* BaseDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B271EC27DC259D00C05B86 /* BaseDI.swift */; };
 		74B5519E27CEB9E600BE3335 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B5519D27CEB9E600BE3335 /* AppDelegate.swift */; };
@@ -102,6 +103,7 @@
 		749D4EAB27DBE0830045A070 /* Document+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Document+CollectionView.swift"; sourceTree = "<group>"; };
 		749D4EAD27DBE0C30045A070 /* Document+Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Document+Protocols.swift"; sourceTree = "<group>"; };
 		749D4EAF27DBE0F30045A070 /* Document+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Document+Search.swift"; sourceTree = "<group>"; };
+		74AD7CC327DFC84F00775C3B /* DarkMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkMode.swift; sourceTree = "<group>"; };
 		74B271EA27DC232500C05B86 /* LocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
 		74B271EC27DC259D00C05B86 /* BaseDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDI.swift; sourceTree = "<group>"; };
 		74B5519A27CEB9E600BE3335 /* WriteX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WriteX.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -185,6 +187,7 @@
 				74457E8727D455870027DAF9 /* Constant.swift */,
 				7413C2DD27D3F9D2000209D7 /* HelperFunctions.swift */,
 				7413C2DB27D3E7E7000209D7 /* CustomCollectionViewLayOut.swift */,
+				74AD7CC327DFC84F00775C3B /* DarkMode.swift */,
 			);
 			path = "Helper ";
 			sourceTree = "<group>";
@@ -669,6 +672,7 @@
 				749D4EAE27DBE0C30045A070 /* Document+Protocols.swift in Sources */,
 				746A02B627D3BFF30027F290 /* AddCell.swift in Sources */,
 				740119A027CFFF7700D1933C /* RegisterAllContainer.swift in Sources */,
+				74AD7CC427DFC84F00775C3B /* DarkMode.swift in Sources */,
 				74457E8327D4328A0027DAF9 /* AddNotesViewModel.swift in Sources */,
 				74457E8827D455870027DAF9 /* Constant.swift in Sources */,
 				74B551CA27CEEB6100BE3335 /* Login+Injection.swift in Sources */,

@@ -49,19 +49,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     
+    
     func configureAppWindow(){
         
         if LocalDataManager.getUsetOfLogin() != nil {
-            
             // Auto Register To Home VC
             guard let rootVC = container.resolve(BaseTabBar.self) else { return }
             LocalDataManager.firstLoginApp(false)
             window?.rootViewController = UINavigationController(rootViewController: rootVC)
+
         }else{
             // Login
             guard let rootVC = container.resolve(LoginVC.self) else { return }
             LocalDataManager.firstLoginApp(true)
             window?.rootViewController = UINavigationController(rootViewController: rootVC)
+
         }
         
         window?.makeKeyAndVisible()
@@ -69,3 +71,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+extension AppDelegate {
+    func overrideApplicationThemeStyle() {
+        if #available(iOS 13.0, *) {
+            // Retrieve your NSUserDefaults value here
+            let stateInterface = LocalDataManager.themeOfInterface()
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveLinear, animations: {
+                UIApplication.shared.keyWindow?.overrideUserInterfaceStyle = stateInterface.uiInterfaceStyle
+                }, completion: .none)
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+}
