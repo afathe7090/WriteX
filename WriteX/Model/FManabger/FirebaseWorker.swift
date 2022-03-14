@@ -23,8 +23,8 @@ class FirebaseWorker{
         return await authLayer.signUp(withEmail: email, password: password)
     }
     
-    func write(data: NSDictionary, indexNote: Int) {
-        authLayer.write(data: data, indexNote: indexNote )
+    func write(data: [Note]) {
+        authLayer.write(data: data)
     }
     
     func update(data: NSDictionary,childIndex: Int){

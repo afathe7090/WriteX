@@ -18,6 +18,8 @@ class DocumentVC: UIViewController {
     var viewModel: DocumentViewModel!
     private var cancelable = Set<AnyCancellable>()
     
+    
+    private let refreshControl = UIRefreshControl()
     @IBOutlet weak var collectionView: UICollectionView!
     
     
@@ -36,11 +38,15 @@ class DocumentVC: UIViewController {
        
         viewModel.setDataNotes()
         
+        
         configureSearchController()
         configureCollectionViewCells()
+        
+        configureRefreshControl()
         bindToReloadCollectionView()
         bindToSearchBarText()
-        print( viewModel.numberOfRows())
+
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -93,6 +99,15 @@ class DocumentVC: UIViewController {
             DispatchQueue.main.async { self.collectionView.reloadData() }
         }.store(in: &self.cancelable)
     }
+    
+    func configureRefreshControl(){
+        collectionView.refreshControl = refreshControl
+        refreshControl.controlEventPublisher(for: .valueChanged).sink { _ in
+            self.viewModel.setDataNotes()
+            self.refreshControl.endRefreshing()
+        }.store(in: &cancelable)
+    }
+    
 }
 
 

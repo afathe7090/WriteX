@@ -9,7 +9,7 @@ import UIKit
 
 class LocalDataManager {
     
-    class func saveLoginUser(user: LoginUser){
+    class func saveLoginUser(user: LoginUser?){
         let encoder = JSONEncoder()
         do{
             let data = try encoder.encode(user)
@@ -39,7 +39,7 @@ class LocalDataManager {
     
     
     
-    class func saveNotesLocaly(_ note: [Note]){
+    class func saveNotesLocaly(_ note: [Note]?){
         let encoder = JSONEncoder()
         do{
             let data = try encoder.encode(note)

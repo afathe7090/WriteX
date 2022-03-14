@@ -67,11 +67,18 @@ class SettingsVC: UIViewController {
 //                let navigationDocument = UINavigationController(rootViewController: documentVC)
 //                self.present(navigationDocument, animated: true, completion: nil)
             }else if index.row == 3{
-                // Log oUt
-                // Note Don't make data defaults = nil
+                self.handelAllDataToBeNUll()
+                
             }
         }.store(in: &cancelabel)
     }
+    
+    func handelAllDataToBeNUll(){
+        LocalDataManager.saveLoginUser(user: nil)
+        LocalDataManager.saveNotesLocaly(nil)
+        LocalDataManager.firstLoginApp(true)
+    }
+    
     
     
 }
