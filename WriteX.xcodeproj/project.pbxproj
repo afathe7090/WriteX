@@ -73,6 +73,7 @@
 		74B824FF27D268D300B4ED82 /* Settings+Inject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B824FE27D268D300B4ED82 /* Settings+Inject.swift */; };
 		74C5D54127D1A681005A9550 /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C5D53F27D1A681005A9550 /* ValidationManager.swift */; };
 		74C5D54227D1A681005A9550 /* PredicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C5D54027D1A681005A9550 /* PredicationManager.swift */; };
+		74F9642727E4D800002DD5ED /* String + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F9642627E4D800002DD5ED /* String + EXT.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -137,6 +138,7 @@
 		74B824FE27D268D300B4ED82 /* Settings+Inject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+Inject.swift"; sourceTree = "<group>"; };
 		74C5D53F27D1A681005A9550 /* ValidationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
 		74C5D54027D1A681005A9550 /* PredicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredicationManager.swift; sourceTree = "<group>"; };
+		74F9642627E4D800002DD5ED /* String + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + EXT.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -520,11 +522,9 @@
 		74B551CF27CEEF0700BE3335 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				74F9642527E4D7E3002DD5ED /* DataType */,
+				74F9642427E4D7CD002DD5ED /* UI+EXT */,
 				740119B827D0226E00D1933C /* Publisher */,
-				7490F0B427D15AC0003AA1B5 /* UIButton+Ext.swift */,
-				74B551D027CEEF2100BE3335 /* UIColor+EXT.swift */,
-				74B551D427CEFF2F00BE3335 /* UIView+EXT.swift */,
-				7460FC2A27DA4A3C009A8007 /* Array+EXT.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -566,6 +566,25 @@
 				74C5D54027D1A681005A9550 /* PredicationManager.swift */,
 			);
 			path = ValidationManager;
+			sourceTree = "<group>";
+		};
+		74F9642427E4D7CD002DD5ED /* UI+EXT */ = {
+			isa = PBXGroup;
+			children = (
+				7490F0B427D15AC0003AA1B5 /* UIButton+Ext.swift */,
+				74B551D427CEFF2F00BE3335 /* UIView+EXT.swift */,
+				74B551D027CEEF2100BE3335 /* UIColor+EXT.swift */,
+			);
+			path = "UI+EXT";
+			sourceTree = "<group>";
+		};
+		74F9642527E4D7E3002DD5ED /* DataType */ = {
+			isa = PBXGroup;
+			children = (
+				7460FC2A27DA4A3C009A8007 /* Array+EXT.swift */,
+				74F9642627E4D800002DD5ED /* String + EXT.swift */,
+			);
+			path = DataType;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -689,6 +708,7 @@
 				74B551CD27CEEBD500BE3335 /* LoginVC.swift in Sources */,
 				74B824F227D2687A00B4ED82 /* DocumentVC.swift in Sources */,
 				74C5D54227D1A681005A9550 /* PredicationManager.swift in Sources */,
+				74F9642727E4D800002DD5ED /* String + EXT.swift in Sources */,
 				7401199927CFFEE000D1933C /* ForgetViewModel.swift in Sources */,
 				74B271EB27DC232500C05B86 /* LocalDataManager.swift in Sources */,
 				7413C2DC27D3E7E7000209D7 /* CustomCollectionViewLayOut.swift in Sources */,

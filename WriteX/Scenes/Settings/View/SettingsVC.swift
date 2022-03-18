@@ -44,7 +44,7 @@ class SettingsVC: UIViewController {
         bindToSelectItemsOfTableVIew()
         
         
-        bindToEmailConfiguretion()
+        setUpTask()
        
         switchOfBindingWithViewModel()
     }
@@ -52,14 +52,20 @@ class SettingsVC: UIViewController {
     
      //MARK: -  Helper Function
     
-    
+    func setUpTask(){
+        Task{
+            await bindToEmailConfiguretion()
+        }
+    }
     
     
      //MARK: - Setup User data that saved from Login
-    func bindToEmailConfiguretion(){
-        viewModel.$userAuth.sink { user in
-            self.emailOfUserLabel.text = user?.email
-        }.store(in: &cancelabel)
+    func bindToEmailConfiguretion() async {
+        DispatchQueue.main.async {
+            self.viewModel.$userAuth.sink { user in
+                self.emailOfUserLabel.text = user?.email
+            }.store(in: &self.cancelabel)
+        }
     }
     
     

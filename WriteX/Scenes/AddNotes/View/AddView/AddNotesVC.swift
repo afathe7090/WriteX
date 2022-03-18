@@ -85,8 +85,8 @@ class AddNotesVC: UIViewController {
     
     func bindToSetFields(){
         viewModel.$note.sink { note in
-            self.titleTextField.text = note?.title
-            self.discriptionTextView.text = note?.discription
+            self.titleTextField.text = note?.title.withNewSpaceIfFound()
+            self.discriptionTextView.text = note?.discription.withNewSpaceIfFound()
         }.store(in: &cancelable)
     }
     
