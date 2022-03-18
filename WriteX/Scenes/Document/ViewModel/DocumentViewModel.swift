@@ -97,6 +97,7 @@ class DocumentViewModel {
     func setEdittingOrAddingNote(_ note: Note){
         if isEditting { notesPublisher.remove(element: edittingNote!)}
         notesPublisher.insert(note, at: 0)
+        
         reloadCollectionView.send(true)
         localDataManagerWithWriteToFirebaseToUpdateIndexs()
     }

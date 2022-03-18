@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import ProgressHUD
 
 enum loginPresentCases{
     case home
@@ -45,7 +46,7 @@ class LoginViewModel {
         Task{
             let (result, error) = await firebase.signIn(email: emailPublisher, password: passwordPublisher)
             if let error = error {
-                print(error)
+                await ProgressHUD.showError(error.localizedDescription, image: nil, interaction: true)
                 await checkValidationOfEmail()
                 await checkValidationOfPassword()
             }else{ presentPublisher.send(.home) }

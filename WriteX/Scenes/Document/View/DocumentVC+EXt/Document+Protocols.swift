@@ -63,9 +63,6 @@ extension DocumentVC: MenuButtonProtocol{
 extension DocumentVC: HiddenViewProtocol {
     func configureHiddenType() {
         viewModel.isHiddenNotes = !viewModel.isHiddenNotes
-        
-        print(viewModel.isHiddenNotes)
-        print(viewModel.notesPublisher)
     }
     
     

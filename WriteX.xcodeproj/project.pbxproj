@@ -20,6 +20,8 @@
 		740119B427D00E6700D1933C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 740119B327D00E6700D1933C /* FirebaseFirestore */; };
 		740119B627D00E6700D1933C /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 740119B527D00E6700D1933C /* FirebaseStorage */; };
 		740119BA27D0227F00D1933C /* TextField+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740119B927D0227F00D1933C /* TextField+Publisher.swift */; };
+		740DBBF927DFFECA00249D38 /* AddView+Delegation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740DBBF827DFFECA00249D38 /* AddView+Delegation.swift */; };
+		740DBBFC27E0039E00249D38 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 740DBBFB27E0039E00249D38 /* ProgressHUD */; };
 		7413C2D827D3CFEE000209D7 /* UICollectionView + Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7413C2D727D3CFEE000209D7 /* UICollectionView + Publisher.swift */; };
 		7413C2DC27D3E7E7000209D7 /* CustomCollectionViewLayOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7413C2DB27D3E7E7000209D7 /* CustomCollectionViewLayOut.swift */; };
 		7413C2DE27D3F9D2000209D7 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7413C2DD27D3F9D2000209D7 /* HelperFunctions.swift */; };
@@ -82,6 +84,7 @@
 		740119A927D00C4C00D1933C /* Firebase+Injection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Firebase+Injection.swift"; sourceTree = "<group>"; };
 		740119AA27D00C4C00D1933C /* FirebaseWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseWorker.swift; sourceTree = "<group>"; };
 		740119B927D0227F00D1933C /* TextField+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+Publisher.swift"; sourceTree = "<group>"; };
+		740DBBF827DFFECA00249D38 /* AddView+Delegation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddView+Delegation.swift"; sourceTree = "<group>"; };
 		7413C2D727D3CFEE000209D7 /* UICollectionView + Publisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Publisher.swift"; sourceTree = "<group>"; };
 		7413C2DB27D3E7E7000209D7 /* CustomCollectionViewLayOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewLayOut.swift; sourceTree = "<group>"; };
 		7413C2DD27D3F9D2000209D7 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				740119A627D005ED00D1933C /* CombineCocoa in Frameworks */,
+				740DBBFC27E0039E00249D38 /* ProgressHUD in Frameworks */,
 				740119B027D00E6700D1933C /* FirebaseAuth in Frameworks */,
 				740119B227D00E6700D1933C /* FirebaseDatabase in Frameworks */,
 				740119B427D00E6700D1933C /* FirebaseFirestore in Frameworks */,
@@ -181,6 +185,23 @@
 			path = Publisher;
 			sourceTree = "<group>";
 		};
+		740DBBF627DFFE9500249D38 /* AddView */ = {
+			isa = PBXGroup;
+			children = (
+				74457E7D27D432380027DAF9 /* AddNotesVC.xib */,
+				74457E7C27D432380027DAF9 /* AddNotesVC.swift */,
+			);
+			path = AddView;
+			sourceTree = "<group>";
+		};
+		740DBBF727DFFEAB00249D38 /* AddView+EXT */ = {
+			isa = PBXGroup;
+			children = (
+				740DBBF827DFFECA00249D38 /* AddView+Delegation.swift */,
+			);
+			path = "AddView+EXT";
+			sourceTree = "<group>";
+		};
 		7413C2DA27D3E7D8000209D7 /* Helper  */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,8 +226,8 @@
 		74457E8027D4325C0027DAF9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				74457E7C27D432380027DAF9 /* AddNotesVC.swift */,
-				74457E7D27D432380027DAF9 /* AddNotesVC.xib */,
+				740DBBF727DFFEAB00249D38 /* AddView+EXT */,
+				740DBBF627DFFE9500249D38 /* AddView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -570,6 +591,7 @@
 				740119B127D00E6700D1933C /* FirebaseDatabase */,
 				740119B327D00E6700D1933C /* FirebaseFirestore */,
 				740119B527D00E6700D1933C /* FirebaseStorage */,
+				740DBBFB27E0039E00249D38 /* ProgressHUD */,
 			);
 			productName = WriteX;
 			productReference = 74B5519A27CEB9E600BE3335 /* WriteX.app */;
@@ -603,6 +625,7 @@
 				74B551B727CEBDA800BE3335 /* XCRemoteSwiftPackageReference "Swinject" */,
 				740119A427D005ED00D1933C /* XCRemoteSwiftPackageReference "CombineCocoa" */,
 				740119AE27D00E6600D1933C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				740DBBFA27E0039D00249D38 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
 			);
 			productRefGroup = 74B5519B27CEB9E600BE3335 /* Products */;
 			projectDirPath = "";
@@ -669,6 +692,7 @@
 				7401199927CFFEE000D1933C /* ForgetViewModel.swift in Sources */,
 				74B271EB27DC232500C05B86 /* LocalDataManager.swift in Sources */,
 				7413C2DC27D3E7E7000209D7 /* CustomCollectionViewLayOut.swift in Sources */,
+				740DBBF927DFFECA00249D38 /* AddView+Delegation.swift in Sources */,
 				749D4EAE27DBE0C30045A070 /* Document+Protocols.swift in Sources */,
 				746A02B627D3BFF30027F290 /* AddCell.swift in Sources */,
 				740119A027CFFF7700D1933C /* RegisterAllContainer.swift in Sources */,
@@ -915,6 +939,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		740DBBFA27E0039D00249D38 /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/relatedcode/ProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.0.0;
+			};
+		};
 		74B551B727CEBDA800BE3335 /* XCRemoteSwiftPackageReference "Swinject" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Swinject/Swinject.git";
@@ -950,6 +982,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 740119AE27D00E6600D1933C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		740DBBFB27E0039E00249D38 /* ProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 740DBBFA27E0039D00249D38 /* XCRemoteSwiftPackageReference "ProgressHUD" */;
+			productName = ProgressHUD;
 		};
 		74B551B827CEBDA800BE3335 /* Swinject */ = {
 			isa = XCSwiftPackageProductDependency;
