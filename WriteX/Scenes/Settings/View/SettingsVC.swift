@@ -34,13 +34,36 @@ class SettingsVC: UIViewController {
         super.viewDidLoad()
         title = "Setting"
         viewModel.configureLoginUser()
+        
+        
+        // setup data from locally and get state of Interface
+        viewModel.bindToChangeModeOfInterface()
+        
+        // set table view data source
         configureTableViewCellBinding()
-        bindToEmailConfiguretion()
         bindToSelectItemsOfTableVIew()
-        handelSwitchState()
-        handelActionOfSwith()
+        
+        
+        bindToEmailConfiguretion()
+       
+        switchOfBindingWithViewModel()
     }
     
+    
+     //MARK: -  Helper Function
+    
+    
+    
+    
+     //MARK: - Setup User data that saved from Login
+    func bindToEmailConfiguretion(){
+        viewModel.$userAuth.sink { user in
+            self.emailOfUserLabel.text = user?.email
+        }.store(in: &cancelabel)
+    }
+    
+    
+     //MARK: - cell of row at TableView DataSource
     func configureTableViewCellBinding(){
         viewModel.$constantCellData.sink(receiveValue: tableView.items({( tableView, indexPath, element)-> UITableViewCell in
             if (indexPath.section == 0) && (indexPath.row == 0) { return self.emailTableViewCell}
@@ -52,12 +75,9 @@ class SettingsVC: UIViewController {
     }
     
     
-    func bindToEmailConfiguretion(){
-        viewModel.$userAuth.sink { user in
-            self.emailOfUserLabel.text = user?.email
-        }.store(in: &cancelabel)
-    }
+
     
+     //MARK: -  Handel Action Of tableVIew
     func bindToSelectItemsOfTableVIew(){
         tableView.didSelectRowPublisher.sink { index in
             if index.row == 1 {
@@ -66,10 +86,9 @@ class SettingsVC: UIViewController {
                 self.delegate = documentVC
                 self.delegate.configureHiddenType()
                 self.navigationController?.pushViewController(documentVC, animated: true)
-                //                let navigationDocument = UINavigationController(rootViewController: documentVC)
-                //                self.present(navigationDocument, animated: true, completion: nil)
+               
             }else if index.row == 3{
-                self.handelAllDataToBeNUll()
+                self.viewModel.handelAllDataToBeNUll()
                 guard let rootVC = container.resolve(LoginVC.self) else { return }
                 rootVC.modalPresentationStyle = .fullScreen
                 rootVC.modalTransitionStyle = .flipHorizontal
@@ -78,30 +97,25 @@ class SettingsVC: UIViewController {
         }.store(in: &cancelabel)
     }
     
-    func handelSwitchState(){
-        let stateOfMode = LocalDataManager.themeOfInterface()
-        self.switchDarkMode.isOn = stateOfMode.uiInterfaceStyle == .dark
-    }
-    
-    func handelActionOfSwith(){
-        switchDarkMode.addTarget(self, action: #selector(handelSwitshOfAction), for: .allEvents)
-    }
     
     
-    @objc
-    func handelSwitshOfAction(){
-        DispatchQueue.main.async {
-            LocalDataManager.configureSystemStyle(theme: self.switchDarkMode.isOn == true ? .dark:.light)
-            AppDelegate().overrideApplicationThemeStyle()
+    
+    
+     //MARK: -  Handel Switch
+    func switchOfBindingWithViewModel(){
+        viewModel.configureSwithISOnStateFromLocallyDatabase()
+        
+        // first we setup switch of state is on or not
+        viewModel.isOnPublisher.receive(on: RunLoop.main).sink { isOn in
+            self.switchDarkMode.isOn = isOn
+        }.store(in: &cancelabel)
+        
+        // send new state to viewModel to save setup Interface mode
+        switchDarkMode.isOnPublisher.receive(on: RunLoop.main).sink{ state in
+            self.viewModel.isOnPublisher.send(state)
         }
+        .store(in: &cancelabel)
     }
-    
-    func handelAllDataToBeNUll(){
-        LocalDataManager.saveLoginUser(user: nil)
-        LocalDataManager.saveNotesLocaly(nil)
-        LocalDataManager.firstLoginApp(true)
-    }
-    
     
     
 }
