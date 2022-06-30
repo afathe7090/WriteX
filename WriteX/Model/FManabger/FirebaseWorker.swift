@@ -37,6 +37,7 @@ class FirebaseWorker{
         do{
             let (error, snapshot)  = try await authLayer.read()
             if error != nil { return  nil }
+            guard let snapshot = snapshot else { return nil }
             return (handelReturnNotes(snapshot: snapshot))
         }catch{
             print(error.localizedDescription)
