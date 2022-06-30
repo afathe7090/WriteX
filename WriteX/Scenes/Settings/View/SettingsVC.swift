@@ -33,6 +33,8 @@ class SettingsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Setting"
+        
+        
         viewModel.configureLoginUser()
         
         
@@ -109,18 +111,16 @@ class SettingsVC: UIViewController {
     
      //MARK: -  Handel Switch
     func switchOfBindingWithViewModel(){
+        // get status of Dark mode from Local Database
         viewModel.configureSwithISOnStateFromLocallyDatabase()
+        switchDarkMode.addTarget(self , action: #selector(handelActionFOrSwitchController),for: .allEvents)
+        switchDarkMode.isOn = viewModel.isOnPublisher.value
         
-        // first we setup switch of state is on or not
-        viewModel.isOnPublisher.receive(on: RunLoop.main).sink { isOn in
-            self.switchDarkMode.isOn = isOn
-        }.store(in: &cancelabel)
-        
-        // send new state to viewModel to save setup Interface mode
-        switchDarkMode.isOnPublisher.receive(on: RunLoop.main).sink{ state in
-            self.viewModel.isOnPublisher.send(state)
-        }
-        .store(in: &cancelabel)
+    }
+    
+    //MARK: - handel Action of Switch
+    @objc func handelActionFOrSwitchController(){
+        self.viewModel.isOnPublisher.send(self.switchDarkMode.isOn)
     }
     
     
