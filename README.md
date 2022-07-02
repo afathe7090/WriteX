@@ -1,10 +1,10 @@
 # WriteX
     
-    Writex is a program to add notes .
-    it is simple app , you can Edit and remove notes . It is easy for you to write a hidden note. 
-    it is a online and ofline app for saving Notes
-    youc can switch between dark and light mode
-
+        Writex is a program to add notes .
+        it is simple app , you can Edit and remove notes . It is easy for you to write a hidden note. 
+        it is a online and ofline app for saving Notes
+        you can switch between dark and light mode
+ 
 
 
 # What did i use ? 
@@ -59,17 +59,17 @@
 # Libraries I used (SPM)
         
         
-        Swinject: 
-            https://github.com/Swinject/Swinject.git
+Swinject: 
+       https://github.com/Swinject/Swinject.git
             
-        Firebase: 
-            https://github.com/firebase/firebase-ios-sdk.git
+Firebase: 
+       https://github.com/firebase/firebase-ios-sdk.git
             
-        Combine Cocoa:
-            https://github.com/CombineCommunity/CombineCocoa.git
+Combine Cocoa:
+       https://github.com/CombineCommunity/CombineCocoa.git
         
-        ProgressHUD:
-            https://github.com/relatedcode/ProgressHUD.git
+ProgressHUD:
+       https://github.com/relatedcode/ProgressHUD.git
 
         
 
