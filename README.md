@@ -1,8 +1,9 @@
 
 # Note:
 
- The design and idea of WriteX is from: 
-      https://www.linkedin.com/in/mahesh-rathod-b0576417b/
+ The design and idea of WriteX is from ( Mahesh Rathod ) , But that code in my github , i wrote it
+ 
+ Linked-in for Mahesh Rathod:  https://www.linkedin.com/in/mahesh-rathod-b0576417b/
 
 
 # WriteX
