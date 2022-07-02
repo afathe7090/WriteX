@@ -1,3 +1,10 @@
+
+# Note:
+
+ The design and idea of WriteX is from: 
+      https://www.linkedin.com/in/mahesh-rathod-b0576417b/
+
+
 # WriteX
     
         Writex is a program to add notes .
