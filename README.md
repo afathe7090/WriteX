@@ -9,12 +9,14 @@
 
 # What did i use ? 
 
+       MVVM-Combine Architecture 
        
        Modern Concurrency async/await
-       MVVM Architecture 
-       Binding Using Combine
+       
        Dependency injection using ( Swinject )
+       
        UI Using XIB-Nib File 
+       
        Firebase Authentication & Real-time
 
 
