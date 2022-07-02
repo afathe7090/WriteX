@@ -19,6 +19,17 @@ extension AddNotesVC: ConfirmEditNote {
 //MARK: - Confirm TextView
 extension AddNotesVC: UITextViewDelegate {
     
+    
+    func configureTextView(){
+        discriptionTextView.delegate        = self
+        discriptionTextView.isScrollEnabled = false
+        textViewDidChange(discriptionTextView)
+        textViewDidBeginEditing(discriptionTextView)
+        textViewDidEndEditing(discriptionTextView)
+    }
+    
+    
+    
     func textViewDidChange(_ textView: UITextView) {
         let size                     = CGSize(width: view.frame.width - 20, height: .infinity)
         let estimatedSize            = discriptionTextView.sizeThatFits(size)
@@ -26,12 +37,8 @@ extension AddNotesVC: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        viewModel.$note
-            .receive(on: DispatchQueue.main)
-            .sink { note in
-                textView.text = (textView.text == "Enter Discription" && self.title == "Add Note") ?  "":note?.discription
-                textView.textColor = .label
-            }.store(in: &cancelable)
+        textView.text = (textView.text == "Enter Discription" && self.title == "Add Note") ?  "":"\(String(describing: self.viewModel.note?.discription))"
+        textView.textColor = .label
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -39,5 +46,14 @@ extension AddNotesVC: UITextViewDelegate {
             textView.text = "Enter Discription"
             textView.textColor = UIColor.lightGray
         }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        if text == "\n"{
+            textView.resignFirstResponder()
+        }
+        
+        return true
     }
 }

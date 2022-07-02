@@ -57,13 +57,7 @@ class AddNotesVC: UIViewController {
     }
     
     
-    func configureTextView(){
-        discriptionTextView.delegate        = self
-        discriptionTextView.isScrollEnabled = false
-        textViewDidChange(discriptionTextView)
-        textViewDidBeginEditing(discriptionTextView)
-        textViewDidEndEditing(discriptionTextView)
-    }
+    
     //MARK: - Binding
     
     
@@ -84,10 +78,12 @@ class AddNotesVC: UIViewController {
     }
     
     func bindToSetFields(){
-        viewModel.$note.sink { note in
-            self.titleTextField.text = note?.title.withNewSpaceIfFound()
-            self.discriptionTextView.text = note?.discription.withNewSpaceIfFound()
-        }.store(in: &cancelable)
+        if title == "Edit Note" {
+            viewModel.$note.sink { note in
+                self.titleTextField.text = note?.title.withNewSpaceIfFound()
+                self.discriptionTextView.text = note?.discription.withNewSpaceIfFound()
+            }.store(in: &cancelable)
+        }
     }
     
     func bindToChangeButtonAction(){

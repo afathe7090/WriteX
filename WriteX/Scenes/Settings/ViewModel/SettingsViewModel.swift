@@ -47,11 +47,6 @@ class SettingsViewModel{
         }.store(in: &cancellable)
     }
     
-   
-    
-    
-    
-    
     
     
     

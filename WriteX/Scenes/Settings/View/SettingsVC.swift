@@ -33,21 +33,13 @@ class SettingsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Setting"
-        
-        
         viewModel.configureLoginUser()
-        
-        
         // setup data from locally and get state of Interface
         viewModel.bindToChangeModeOfInterface()
-        
         // set table view data source
         configureTableViewCellBinding()
         bindToSelectItemsOfTableVIew()
-        
-        
         setUpTask()
-       
         switchOfBindingWithViewModel()
     }
     
