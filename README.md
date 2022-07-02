@@ -49,7 +49,29 @@
    ![AddNote-light](https://user-images.githubusercontent.com/76500072/177010229-8fb8da02-d57b-4be2-bb1e-4e3f1e7c8f76.png)  ![addNote-Dark](https://user-images.githubusercontent.com/76500072/177010226-f76c0282-6784-4650-b141-557be5735b85.png)
 
 
+## Actions for Notes
 
+   ![SettingNote- Light](https://user-images.githubusercontent.com/76500072/177010310-e071c10d-0932-4172-b85c-8f32004e8cac.png)  ![SettingNote- Dark](https://user-images.githubusercontent.com/76500072/177010309-a5771105-98c9-4917-82f7-87eea4eda980.png)
+
+
+
+
+# Libraries I used (SPM)
+        
+        
+        Swinject: 
+            https://github.com/Swinject/Swinject.git
+            
+        Firebase: 
+            https://github.com/firebase/firebase-ios-sdk.git
+            
+        Combine Cocoa:
+            https://github.com/CombineCommunity/CombineCocoa.git
+        
+        ProgressHUD:
+            https://github.com/relatedcode/ProgressHUD.git
+
+        
 
 
 
